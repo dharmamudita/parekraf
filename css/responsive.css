@@ -1,0 +1,164 @@
+    /* =========================================================================
+       RESPONSIVE MOBILE & TABLET REFINEMENTS (ZERO OVERLAP)
+    ========================================================================= */
+    @media (max-width: 1120px) {
+      .dpp-grid { grid-template-columns: repeat(2, 1fr); }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .charts-grid,
+      .sim-grid,
+      .advisor-grid,
+      .bench-layout,
+      .section-head { grid-template-columns: 1fr; }
+      .section-lead { justify-self: start; }
+    }
+
+    @media (max-width: 960px) {
+      .site-header {
+        top: 12px;
+        padding: 0 12px;
+      }
+      .nav-capsule {
+        width: 100%;
+        max-width: 480px;
+        padding: 6px 8px 6px 14px;
+        background: rgba(14, 14, 18, 0.85);
+        backdrop-filter: blur(28px) saturate(180%);
+        -webkit-backdrop-filter: blur(28px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+      .nav-links, .nav-sep { display: none; }
+      .nav-toggle { display: inline-flex; }
+
+      .hero {
+        padding-top: 86px;
+        gap: 22px;
+      }
+      .hero-dots {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 16px;
+      }
+      .hero-stage {
+        min-height: auto;
+        padding: 8px 0;
+      }
+      .hero-bottom {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .hero-cta-wrap {
+        width: 100%;
+      }
+      .hero-counter {
+        display: none;
+      }
+
+      .tier-grid,
+      .formula-grid,
+      .dpp-split-banner,
+      .advisor-cols,
+      .sim-stats-row { grid-template-columns: 1fr; }
+
+      .modal-q-strip { grid-template-columns: repeat(2, 1fr); }
+
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .toolbar-filters {
+        justify-content: stretch;
+      }
+      .toolbar-filters .text-input,
+      .toolbar-filters .select-input,
+      .ds-search-input {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
+    /* Mobile Carousel for DPP (<860px) */
+    @media (max-width: 860px) {
+      .dpp-mobile-bar {
+        display: flex;
+      }
+      .dpp-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 14px;
+        padding: 4px 6px 16px 6px;
+        margin: 0 -4px;
+        scrollbar-width: none;
+      }
+      .dpp-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .dpp-card {
+        flex: 0 0 clamp(270px, 80vw, 320px) !important;
+        min-width: 270px !important;
+        max-width: 320px !important;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        min-height: 220px;
+      }
+      .mobile-bottom-dock {
+        display: flex;
+      }
+      body {
+        padding-bottom: 74px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card { padding: 16px; border-radius: 16px; }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .kpi-card {
+        min-height: 108px;
+        padding: 14px;
+      }
+      .kpi-value {
+        font-size: clamp(19px, 5.2vw, 24px);
+      }
+      .kpi-foot {
+        font-size: 11px;
+      }
+
+      .hero-kicker { font-size: 10px; letter-spacing: 0.1em; }
+      .hero-kicker::before { width: 14px; }
+      .hero-line { font-size: clamp(26px, 9.2vw, 44px); }
+      .hero-line.serif-mid { font-size: clamp(30px, 10.4vw, 50px); }
+      .hero-cta-btn { width: 100%; justify-content: center; }
+      .hero-cta-line { display: none; }
+
+      /* Stack Zone Bar Label Above Track on Small Phones */
+      .zone-row {
+        grid-template-columns: 1fr auto;
+        gap: 6px 10px;
+      }
+      .zone-track {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+      .q-chart { gap: 10px; height: 200px; }
+      .footer-meta { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  

@@ -1,0 +1,357 @@
+    /* =========================================================================
+       DPP DETAIL MODAL (MONOCHROME EDITORIAL SHEET)
+    ========================================================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      background: rgba(4, 4, 5, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      width: min(820px, 100%);
+      max-height: 88svh;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--r-lg);
+      padding: clamp(20px, 3vw, 32px);
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.8);
+      transform: translateY(16px);
+      transition: transform 0.35s var(--ease);
+    }
+
+    .modal-overlay.open .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      background: transparent;
+      color: var(--ink);
+      font-size: 20px;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: var(--ink);
+      color: #070708;
+    }
+
+    .modal-q-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .modal-q-item {
+      padding: 11px 12px;
+      border-radius: var(--r-sm);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .dpp-rank {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink-3);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .dpp-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .dpp-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .dpp-bar-track {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .dpp-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--ink);
+    }
+
+    .dpp-sector {
+      font-size: 12px;
+      color: var(--ink-2);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .dpp-rule-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--ink);
+      padding-top: 9px;
+      border-top: 1px solid var(--line);
+    }
+
+    .dpp-rule-tag.muted { color: var(--ink-3); }
+
+
+    /* --- 3. EXECUTIVE POLICY BRIEF MODAL & PRINT STYLES --- */
+    .exec-actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .brief-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(4, 4, 6, 0.88);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 4vw, 40px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease);
+    }
+    .brief-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .brief-sheet {
+      background: #0f0f13;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 880px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transform: translateY(20px);
+      transition: transform 0.35s var(--ease);
+    }
+    .brief-overlay.open .brief-sheet {
+      transform: translateY(0);
+    }
+
+    /* Printable Paper Structure */
+    .brief-paper {
+      background: #ffffff;
+      color: #09090b;
+      padding: clamp(24px, 4.5vw, 44px);
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .brief-paper-head {
+      border-bottom: 2px solid #09090b;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .brief-paper-title {
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #09090b;
+      margin: 0 0 4px 0;
+    }
+    .brief-paper-sub {
+      font-size: 11px;
+      color: #52525b;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0;
+    }
+    .brief-meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      background: #f4f4f5;
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 11px;
+    }
+    .brief-meta-item strong {
+      display: block;
+      color: #09090b;
+      font-size: 13px;
+    }
+    .brief-meta-item span {
+      color: #71717a;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .brief-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-left: 3px solid #09090b;
+      padding-left: 8px;
+      margin: 18px 0 10px 0;
+      color: #09090b;
+    }
+    .brief-paper p, .brief-paper li {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #27272a;
+    }
+    .brief-paper table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin: 12px 0;
+    }
+    .brief-paper th {
+      background: #f4f4f5;
+      border-bottom: 1px solid #d4d4d8;
+      padding: 6px 8px;
+      text-align: left;
+      font-weight: 600;
+      color: #09090b;
+    }
+    .brief-paper td {
+      border-bottom: 1px solid #e4e4e7;
+      padding: 6px 8px;
+      color: #27272a;
+    }
+
+    .brief-signatures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e4e4e7;
+    }
+    .brief-sign-box {
+      font-size: 11px;
+      color: #52525b;
+    }
+    .brief-sign-space {
+      height: 48px;
+      border-bottom: 1px dotted #a1a1aa;
+      margin-bottom: 6px;
+      width: 180px;
+    }
+
+    /* Print Specific Media Styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #brief-paper, #brief-paper * {
+        visibility: visible;
+      }
+      #brief-paper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .site-header, .mobile-bottom-dock, .mobile-drawer, .hero, .nav-capsule {
+        display: none !important;
+      }
+      @page {
+        margin: 1.5cm;
+        size: A4 portrait;
+      }
+    }
+
+    /* Responsive Adjustments for Features */
+    @media (max-width: 960px) {
+      .geo-grid-layout {
+        grid-template-columns: 1fr;
+      }
+      .matchmaker-card-grid {
+        grid-template-columns: 1fr;
+      }
+      .brief-meta-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      .match-scale-chips {
+        grid-template-columns: 1fr;
+      }
+      .match-sectors-wrap {
+        grid-template-columns: 1fr;
+      }
+      .match-gauge-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .geo-legend-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    
+  

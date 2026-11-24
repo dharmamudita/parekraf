@@ -1,0 +1,99 @@
+    /* =========================================================================
+       DATASET EXPLORER & PAGINATION
+    ========================================================================= */
+    .cat-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+      border: 1px solid var(--line);
+    }
+
+    .cat-tinggi { background: var(--ink); color: #070708; border-color: var(--ink); font-weight: 600; }
+    .cat-sedang { background: rgba(255, 255, 255, 0.1); color: var(--ink); }
+    .cat-rendah { background: rgba(255, 255, 255, 0.04); color: var(--ink-2); }
+    .cat-nol { background: transparent; color: var(--ink-3); border-style: dashed; }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .page-info {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--ink-2);
+    }
+
+    .page-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .page-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .page-btn:hover:not(:disabled) {
+      background: var(--ink);
+      color: #070708;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 48px var(--pad-x) 40px;
+      background: #040405;
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .footer-sub {
+      font-size: 13px;
+      color: var(--ink-2);
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .footer-meta {
+      text-align: right;
+      font-size: 12.5px;
+      color: var(--ink-2);
+      line-height: 1.75;
+    }
+
+    .footer-meta strong { color: var(--ink); font-weight: 600; }
+
