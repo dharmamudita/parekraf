@@ -1,0 +1,359 @@
+[
+  {
+    "antecedents": [
+      "Jawa",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Investasi_Tinggi",
+      "Non_DPP"
+    ],
+    "support": 0.0367,
+    "confidence": 0.4538,
+    "lift": 2.2551,
+    "leverage": 0.0204,
+    "conviction": 1.4624
+  },
+  {
+    "antecedents": [
+      "Jawa",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.0401,
+    "confidence": 0.4958,
+    "lift": 2.1325,
+    "leverage": 0.0213,
+    "conviction": 1.5222
+  },
+  {
+    "antecedents": [
+      "Jawa",
+      "Non_DPP",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.0367,
+    "confidence": 0.4954,
+    "lift": 2.1309,
+    "leverage": 0.0195,
+    "conviction": 1.5211
+  },
+  {
+    "antecedents": [
+      "Jawa",
+      "Triwulan_4"
+    ],
+    "consequents": [
+      "Investasi_Tinggi",
+      "Non_DPP"
+    ],
+    "support": 0.0306,
+    "confidence": 0.3814,
+    "lift": 1.8952,
+    "leverage": 0.0144,
+    "conviction": 1.2912
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Non_DPP",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Jawa"
+    ],
+    "support": 0.0367,
+    "confidence": 0.5806,
+    "lift": 1.8096,
+    "leverage": 0.0164,
+    "conviction": 1.6195
+  },
+  {
+    "antecedents": [
+      "Jawa",
+      "Non_DPP",
+      "Triwulan_4"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.0306,
+    "confidence": 0.4167,
+    "lift": 1.7922,
+    "leverage": 0.0135,
+    "conviction": 1.3157
+  },
+  {
+    "antecedents": [
+      "Jawa"
+    ],
+    "consequents": [
+      "Investasi_Tinggi",
+      "Non_DPP"
+    ],
+    "support": 0.1156,
+    "confidence": 0.3602,
+    "lift": 1.7899,
+    "leverage": 0.051,
+    "conviction": 1.2484
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Non_DPP"
+    ],
+    "consequents": [
+      "Jawa"
+    ],
+    "support": 0.1156,
+    "confidence": 0.5743,
+    "lift": 1.7899,
+    "leverage": 0.051,
+    "conviction": 1.5954
+  },
+  {
+    "antecedents": [
+      "Jawa",
+      "Triwulan_4"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.0333,
+    "confidence": 0.4153,
+    "lift": 1.7861,
+    "leverage": 0.0147,
+    "conviction": 1.3125
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Non_DPP",
+      "Triwulan_4"
+    ],
+    "consequents": [
+      "Jawa"
+    ],
+    "support": 0.0306,
+    "confidence": 0.5696,
+    "lift": 1.7752,
+    "leverage": 0.0134,
+    "conviction": 1.578
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Jawa"
+    ],
+    "support": 0.0401,
+    "confidence": 0.5566,
+    "lift": 1.7347,
+    "leverage": 0.017,
+    "conviction": 1.5317
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Jawa",
+      "Non_DPP"
+    ],
+    "support": 0.0367,
+    "confidence": 0.5094,
+    "lift": 1.7347,
+    "leverage": 0.0155,
+    "conviction": 1.4398
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi"
+    ],
+    "consequents": [
+      "Jawa"
+    ],
+    "support": 0.1292,
+    "confidence": 0.5556,
+    "lift": 1.7314,
+    "leverage": 0.0546,
+    "conviction": 1.528
+  },
+  {
+    "antecedents": [
+      "Jawa"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.1292,
+    "confidence": 0.4025,
+    "lift": 1.7314,
+    "leverage": 0.0546,
+    "conviction": 1.2846
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Triwulan_4"
+    ],
+    "consequents": [
+      "Jawa",
+      "Non_DPP"
+    ],
+    "support": 0.0306,
+    "confidence": 0.5,
+    "lift": 1.7025,
+    "leverage": 0.0126,
+    "conviction": 1.4126
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi",
+      "Triwulan_4"
+    ],
+    "consequents": [
+      "Jawa"
+    ],
+    "support": 0.0333,
+    "confidence": 0.5444,
+    "lift": 1.6968,
+    "leverage": 0.0137,
+    "conviction": 1.4908
+  },
+  {
+    "antecedents": [
+      "Investasi_Tinggi"
+    ],
+    "consequents": [
+      "Jawa",
+      "Non_DPP"
+    ],
+    "support": 0.1156,
+    "confidence": 0.4971,
+    "lift": 1.6926,
+    "leverage": 0.0473,
+    "conviction": 1.4044
+  },
+  {
+    "antecedents": [
+      "Jawa",
+      "Non_DPP"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.1156,
+    "confidence": 0.3935,
+    "lift": 1.6926,
+    "leverage": 0.0473,
+    "conviction": 1.2655
+  },
+  {
+    "antecedents": [
+      "Non_DPP",
+      "Sumatera",
+      "Triwulan_1"
+    ],
+    "consequents": [
+      "Investasi_Rendah"
+    ],
+    "support": 0.0306,
+    "confidence": 0.4891,
+    "lift": 1.5053,
+    "leverage": 0.0103,
+    "conviction": 1.3214
+  },
+  {
+    "antecedents": [
+      "Investasi_Rendah",
+      "Triwulan_2"
+    ],
+    "consequents": [
+      "Sumatera"
+    ],
+    "support": 0.0313,
+    "confidence": 0.4466,
+    "lift": 1.4931,
+    "leverage": 0.0103,
+    "conviction": 1.2665
+  },
+  {
+    "antecedents": [
+      "Sumatera",
+      "Triwulan_3"
+    ],
+    "consequents": [
+      "Investasi_Rendah"
+    ],
+    "support": 0.0326,
+    "confidence": 0.48,
+    "lift": 1.4772,
+    "leverage": 0.0105,
+    "conviction": 1.2982
+  },
+  {
+    "antecedents": [
+      "Kawasan_Prioritas_DPP"
+    ],
+    "consequents": [
+      "Investasi_Tinggi"
+    ],
+    "support": 0.0313,
+    "confidence": 0.3433,
+    "lift": 1.4765,
+    "leverage": 0.0101,
+    "conviction": 1.1687
+  },
+  {
+    "antecedents": [
+      "Sumatera",
+      "Triwulan_1"
+    ],
+    "consequents": [
+      "Investasi_Rendah",
+      "Non_DPP"
+    ],
+    "support": 0.0306,
+    "confidence": 0.4455,
+    "lift": 1.4662,
+    "leverage": 0.0097,
+    "conviction": 1.2555
+  },
+  {
+    "antecedents": [
+      "Sumatera",
+      "Triwulan_1"
+    ],
+    "consequents": [
+      "Investasi_Rendah"
+    ],
+    "support": 0.0326,
+    "confidence": 0.4752,
+    "lift": 1.4625,
+    "leverage": 0.0103,
+    "conviction": 1.2864
+  },
+  {
+    "antecedents": [
+      "Investasi_Nol"
+    ],
+    "consequents": [
+      "Non_DPP",
+      "Sumatera"
+    ],
+    "support": 0.0523,
+    "confidence": 0.3969,
+    "lift": 1.4596,
+    "leverage": 0.0165,
+    "conviction": 1.2072
+  }
+]
