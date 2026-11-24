@@ -183,52 +183,98 @@
       background: rgba(255, 255, 255, 0.12);
     }
 
-    .brand-live-dot {
+    /* Brand Live Radar Badge (High-Tech Intelligence Indicator) */
+    .brand-radar-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5.5px;
+      padding: 3px 8px 3px 6px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.32);
+      margin-left: 3px;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+    }
+
+    .radar-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: #10b981;
-      box-shadow: 0 0 7px #10b981;
-      margin-left: 2px;
-      flex-shrink: 0;
+      box-shadow: 0 0 8px #10b981;
+      animation: radarPulse 1.8s infinite ease-in-out;
     }
 
+    @keyframes radarPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.72); opacity: 0.45; }
+    }
+
+    .radar-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #34d399;
+      line-height: 1;
+    }
+
+    /* Mobile Tactile Capsule Menu Button */
     .nav-toggle {
       display: none;
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--ink);
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 5px;
+      gap: 7px;
+      height: 35px;
+      padding: 0 12px 0 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
       cursor: pointer;
       flex-shrink: 0;
-      transition: all 0.22s ease;
+      transition: all 0.22s var(--ease);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.14);
     }
 
-    .nav-toggle:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.28);
+    .nav-toggle:hover,
+    .nav-toggle:active {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.38);
+      transform: scale(0.96);
+    }
+
+    .toggle-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+    }
+
+    .toggle-bars-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 13px;
+      align-items: center;
+      justify-content: center;
     }
 
     .toggle-bar {
-      width: 17px;
-      height: 1.6px;
+      width: 13px;
+      height: 1.5px;
       background: var(--ink);
       border-radius: 2px;
-      transition: transform 0.26s var(--ease), opacity 0.2s ease;
+      transition: transform 0.28s var(--ease), opacity 0.2s ease;
     }
 
     .nav-toggle.open .bar-1 {
-      transform: translateY(3.3px) rotate(45deg);
+      transform: translateY(2.75px) rotate(45deg);
     }
 
     .nav-toggle.open .bar-2 {
-      transform: translateY(-3.3px) rotate(-45deg);
+      transform: translateY(-2.75px) rotate(-45deg);
     }
 
     /* Modern Editorial Mobile Navigation Drawer */
@@ -407,7 +453,9 @@
       position: fixed;
       bottom: 16px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
       z-index: 150;
       background: rgba(14, 14, 18, 0.88);
       backdrop-filter: blur(24px) saturate(180%);
@@ -419,7 +467,13 @@
       align-items: center;
       gap: 6px;
       max-width: 94vw;
-      transition: transform 0.3s var(--ease), opacity 0.3s ease;
+      transition: transform 0.35s var(--ease), opacity 0.35s ease;
+    }
+
+    .mobile-bottom-dock.dock-visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .dock-btn {
@@ -551,9 +605,28 @@
       display: grid;
       place-items: center;
       min-height: 280px;
-      padding: 8px 0;
+      padding: 10px 0;
       width: 100%;
       overflow: hidden;
+    }
+
+    /* Ambient Cosmic Aura Glow behind typography */
+    .hero-stage::before {
+      content: '';
+      position: absolute;
+      width: min(580px, 88vw);
+      height: min(240px, 38vh);
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.035) 45%, transparent 75%);
+      filter: blur(48px);
+      z-index: 1;
+      pointer-events: none;
+      animation: auraBreath 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes auraBreath {
+      0% { transform: scale(0.92) translateY(0); opacity: 0.55; }
+      100% { transform: scale(1.1) translateY(-6px); opacity: 0.95; }
     }
 
     .hero-backdrop-type {
@@ -578,17 +651,29 @@
       text-transform: uppercase;
       text-align: center;
       white-space: nowrap;
-      background: linear-gradient(135deg, #ffffff 0%, #ececed 30%, #a8a8b3 70%, #ffffff 100%);
-      background-size: 200% 200%;
+      background: linear-gradient(
+        105deg,
+        #ffffff 0%,
+        #f4f4f5 16%,
+        #71717a 30%,
+        #ffffff 48%,
+        #52525b 62%,
+        #ffffff 78%,
+        #e4e4e7 88%,
+        #ffffff 100%
+      );
+      background-size: 260% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: heroSheen 9s ease-in-out infinite alternate;
-      transition: transform 0.5s var(--ease), opacity 0.35s ease;
+      animation: liquidChrome 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.22)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.09));
+      transition: transform 0.5s var(--ease), opacity 0.35s ease, filter 0.5s ease;
     }
 
-    @keyframes heroSheen {
-      0% { background-position: 0% 40%; }
-      100% { background-position: 100% 60%; }
+    @keyframes liquidChrome {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .hero-line.serif-mid {
@@ -596,26 +681,47 @@
       font-style: italic;
       font-weight: 400;
       text-transform: none;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.015em;
       font-size: clamp(34px, 8.6vw, 126px);
       color: transparent;
-      -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.55);
+      -webkit-text-stroke: 1.3px rgba(255, 255, 255, 0.85);
       -webkit-text-fill-color: transparent;
       background: none;
       line-height: 0.9;
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 25px rgba(255, 255, 255, 0.3),
+        0 0 50px rgba(255, 255, 255, 0.15);
+      animation: neonPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonPulse {
+      0% {
+        -webkit-text-stroke-color: rgba(255, 255, 255, 0.7);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.35), 0 0 20px rgba(255, 255, 255, 0.15);
+        transform: scale(0.995);
+      }
+      100% {
+        -webkit-text-stroke-color: rgba(255, 255, 255, 1);
+        text-shadow: 0 0 16px rgba(255, 255, 255, 0.7), 0 0 38px rgba(255, 255, 255, 0.4), 0 0 65px rgba(255, 255, 255, 0.2);
+        transform: scale(1.006);
+      }
     }
 
     .hero-backdrop-type.switching #h-line-1 {
       opacity: 0;
-      transform: translateY(-14px);
+      transform: translateY(-20px) scale(0.96);
+      filter: blur(8px);
     }
     .hero-backdrop-type.switching #h-line-2 {
       opacity: 0;
-      transform: scale(0.94);
+      transform: scale(0.9);
+      filter: blur(6px);
     }
     .hero-backdrop-type.switching #h-line-3 {
       opacity: 0;
-      transform: translateY(14px);
+      transform: translateY(20px) scale(0.96);
+      filter: blur(8px);
     }
 
     #h-line-1 { transition-delay: 0ms; }
@@ -1914,10 +2020,19 @@
     }
 
     @media (max-width: 960px) {
+      .site-header {
+        top: 12px;
+        padding: 0 12px;
+      }
       .nav-capsule {
         width: 100%;
-        max-width: 460px;
+        max-width: 480px;
         padding: 6px 8px 6px 14px;
+        background: rgba(14, 14, 18, 0.85);
+        backdrop-filter: blur(28px) saturate(180%);
+        -webkit-backdrop-filter: blur(28px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       }
       .nav-links, .nav-sep { display: none; }
       .nav-toggle { display: inline-flex; }
@@ -2069,7 +2184,10 @@
           </svg>
         </span>
         <span class="brand-word">Parekraf<span>Mind</span></span>
-        <span class="brand-live-dot" title="Data PMDN 2025 Aktif" aria-label="Status data aktif"></span>
+        <span class="brand-radar-pill" title="Data PMDN 2025 Live">
+          <span class="radar-dot"></span>
+          <span class="radar-tag">LIVE '25</span>
+        </span>
       </a>
 
       <span class="nav-sep" aria-hidden="true"></span>
@@ -2084,8 +2202,11 @@
       </ul>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu navigasi" aria-expanded="false">
-        <span class="toggle-bar bar-1"></span>
-        <span class="toggle-bar bar-2"></span>
+        <span class="toggle-text" id="toggle-text">MENU</span>
+        <span class="toggle-bars-wrap">
+          <span class="toggle-bar bar-1"></span>
+          <span class="toggle-bar bar-2"></span>
+        </span>
       </button>
     </nav>
   </header>
@@ -2921,6 +3042,10 @@
       document.querySelectorAll('.dock-btn[data-target]').forEach(b => {
         b.classList.toggle('active', b.dataset.target === current);
       });
+      const mobileDock = document.getElementById('mobile-dock');
+      if (mobileDock) {
+        mobileDock.classList.toggle('dock-visible', scrollTop > 200);
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -2929,6 +3054,7 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const navToggle = document.getElementById('nav-toggle');
     const dockMenuToggle = document.getElementById('dock-menu-toggle');
+    const toggleText = document.getElementById('toggle-text');
 
     function openMobile() {
       if (!mobileMenu) return;
@@ -2937,6 +3063,7 @@
       if (navToggle) {
         navToggle.classList.add('open');
         navToggle.setAttribute('aria-expanded', 'true');
+        if (toggleText) toggleText.textContent = 'TUTUP';
       }
       document.body.style.overflow = 'hidden';
     }
@@ -2948,6 +3075,7 @@
       if (navToggle) {
         navToggle.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
+        if (toggleText) toggleText.textContent = 'MENU';
       }
       document.body.style.overflow = '';
     }
