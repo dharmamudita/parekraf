@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (titleEl) titleEl.textContent = prov === 'ALL' ? 'Evaluasi Nasional (38 Provinsi)' : `Evaluasi Kesiapan: ${prov}`;
     if (subEl) {
       subEl.textContent = dpps.length
-        ? `Memiliki kawasan prioritas: ${dpps.map(x => x.replace('Prambananan', 'Prambanan')).join(', ')}`
-        : 'Analisis keselarasan PMDN 2025 dengan kaidah Apriori & FP-Growth regional.';
+        ? `Kawasan Prioritas: ${dpps.map(x => x.replace('Prambananan', 'Prambanan')).join(', ')}`
+        : 'Korelasi PMDN 2025 & Kaidah Asosiasi Regional';
     }
     if (dppTagEl) {
       dppTagEl.textContent = prov === 'ALL'
@@ -164,15 +164,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (riskSummary) riskSummary.textContent = summaryText;
 
-    // Query Matched Association Rules
+    // Query Matched Association Rules (exclude rules belonging to a different archipelago zone)
     const matchedRuleEl = document.getElementById('match-matched-rule');
     const qTag = `Triwulan_${matchCurrentQuarter}`;
+    const zoneSet = new Set(['Jawa', 'Sumatera', 'Bali_Nusra', 'Kalimantan', 'Sulawesi', 'Maluku_Papua']);
+    const hasOtherZone = r => provZone !== 'ALL' && [...r.a, ...r.c].some(t => zoneSet.has(t) && t !== provZone);
     let relevantRules = APP_DATA.generalRules.filter(r =>
+      !hasOtherZone(r) &&
       (r.a.includes(matchCurrentScale) || r.c.includes(matchCurrentScale)) &&
       (r.a.includes(qTag) || r.c.includes(qTag) || r.a.includes(provZone) || r.c.includes(provZone))
     );
+    if (!relevantRules.length && provZone !== 'ALL') {
+      relevantRules = APP_DATA.generalRules.filter(r => r.a.includes(provZone) || r.c.includes(provZone));
+    }
     if (!relevantRules.length) {
-      relevantRules = APP_DATA.generalRules.filter(r => r.a.includes(provZone) || r.c.includes(provZone) || r.a.includes(matchCurrentScale));
+      relevantRules = APP_DATA.generalRules.filter(r => !hasOtherZone(r) && r.a.includes(matchCurrentScale));
     }
     relevantRules.sort((a, b) => b.l - a.l);
 
@@ -203,9 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const leadKab = activeKabs[0] ? activeKabs[0].kab : 'sentra utama';
     const oppKab = oppKabs[0] ? oppKabs[0].kab : 'daerah penyangga';
 
-    if (dir1) dir1.innerHTML = `<strong>Timing Momentum:</strong> Inisiasi belanja sarana di ${leadKab} pada Triwulan ${prevQ} agar siap beroperasi penuh saat puncak Triwulan ${matchCurrentQuarter}.`;
-    if (dir2) dir2.innerHTML = `<strong>Sinergi Rantai Pasok:</strong> Kembangkan subsektor <em>${sectorLabels[matchCurrentSector] || cleanTag(matchCurrentSector)}</em> melalui kemitraan dengan sentra UMKM lokal di sekitar ${oppKab}.`;
-    if (dir3) dir3.innerHTML = `<strong>Akses Perizinan &amp; Fasilitas:</strong> Manfaatkan jalur perizinan berusaha terpadu (OSS) dan skema insentif pemda untuk skala ${cleanTag(matchCurrentScale)}.`;
+    if (dir1) dir1.innerHTML = `<strong>Timing:</strong> Persiapan modal di ${leadKab} pada Q${prevQ} menjelang puncak Q${matchCurrentQuarter}.`;
+    if (dir2) dir2.innerHTML = `<strong>Rantai Pasok:</strong> Kemitraan subsektor <em>${sectorLabels[matchCurrentSector] || cleanTag(matchCurrentSector)}</em> bersama UMKM ${oppKab}.`;
+    if (dir3) dir3.innerHTML = `<strong>Perizinan:</strong> Optimalkan fasilitas OSS dan insentif daerah untuk ${cleanTag(matchCurrentScale)}.`;
 
     // Update Top Active & Opportunity Kab/Kota Lists
     const topKabsEl = document.getElementById('adv-top-kabs');

@@ -212,11 +212,14 @@ document.addEventListener('DOMContentLoaded', () => {
     zoomControl: true
   });
 
-  // CartoDB Dark Matter monochrome cartography (Real roads, coastlines, cities & borders)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: 'abcd',
-    maxZoom: 19
+  // Esri Dark Gray Canvas monochrome cartography (Real coastlines, cities & borders without API watermark)
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
+  }).addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 16,
+    opacity: 0.72
   }).addTo(map);
 
   function updateHud(data) {
@@ -423,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pct,
         n: `${dppObj.n} laporan`,
         top: `${dppObj.high} Skala Tinggi · ${dppObj.zero} Nol`,
-        rule: `<strong>Kaidah Kawasan DPP:</strong> ${dppObj.rule}. Koordinat GPS: ${pt.lat.toFixed(2)}°, ${pt.lng.toFixed(2)}° BT.`
+        rule: `<strong>Kaidah DPP:</strong> ${dppObj.rule}.`
       });
 
       map.flyTo([pt.lat, pt.lng], 7, { duration: 0.75 });

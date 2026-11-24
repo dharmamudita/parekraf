@@ -1,43 +1,98 @@
 /* =========================================================================
-   HERO KINETIC TYPOGRAPHY & VIDEO BACKGROUND CROSSFADE
+   HERO KINETIC TYPOGRAPHY & SINGLE-DECODER SMOOTH VIDEO BACKGROUND
 ========================================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   const SLIDES = [
     {
       l1: 'PAREKRAF', l2: 'Investasi', l3: 'NUSANTARA 2025',
-      eyebrow: 'DATA MINING 2 · SEKTOR PARIWISATA & EKONOMI KREATIF',
-      tagline: 'Pemetaan Komprehensif Arus Modal PMDN 38 Provinsi Berbasis <em>Algoritma Asosiasi</em>.',
+      eyebrow: 'PARIWISATA & EKONOMI KREATIF · 2025',
+      tagline: 'Intelijen arus modal PMDN 38 provinsi berbasis <em>Apriori &amp; FP-Growth</em>.',
       count: '01'
     },
     {
       l1: 'APRIORI', l2: 'versus', l3: 'FP-GROWTH',
-      eyebrow: 'BENCHMARK · ASSOCIATION RULE MINING',
-      tagline: 'Menemukan keterkaitan <em>wilayah, triwulan</em>, dan skala modal wisata.',
+      eyebrow: 'ASSOCIATION RULE MINING · BENCHMARK',
+      tagline: 'Memetakan pola keterkaitan <em>wilayah, triwulan</em>, dan skala modal wisata.',
       count: '02'
     },
     {
       l1: 'DESTINASI', l2: 'Prioritas', l3: 'NUSANTARA',
-      eyebrow: 'EQUITY · 10 KAWASAN PARIWISATA PRIORITAS',
-      tagline: 'Mengukur daya tarik <em>Destinasi Prioritas</em> bagi pelaku kreatif nasional.',
+      eyebrow: '10 KAWASAN PARIWISATA PRIORITAS',
+      tagline: 'Mengukur daya tarik <em>Destinasi Prioritas</em> bagi ekonomi kreatif nasional.',
       count: '03'
     }
   ];
 
   let activeSlide = 0;
+  let isHeroInView = true;
+  let videoCleanupTimer = null;
   const heroBackdrop = document.getElementById('hero-backdrop');
   const heroSectionEl = document.getElementById('hero');
-  const heroVids = document.querySelectorAll('.hero-vid');
+  const heroVids = Array.from(document.querySelectorAll('.hero-vid'));
   let isSlideBusy = false;
 
-  // Start all videos in hardware loop immediately
-  heroVids.forEach(v => {
-    v.play().catch(() => {});
-  });
+  // Decode ONLY the active video so 3 simultaneous decoders never starve the GPU
+  function syncActiveVideo(immediate) {
+    if (videoCleanupTimer) {
+      clearTimeout(videoCleanupTimer);
+      videoCleanupTimer = null;
+    }
 
-  // Ambient Spotlight Sheen that tracks cursor smoothly without layout thrashing
+    heroVids.forEach((v, i) => {
+      const isActive = (i === activeSlide);
+      v.classList.toggle('active', isActive);
+      if (isActive) {
+        if (v.preload === 'none') v.preload = 'auto';
+        if (isHeroInView && v.paused) {
+          v.play().catch(() => {});
+        }
+      }
+    });
+
+    const pauseOthers = () => {
+      heroVids.forEach((v, i) => {
+        if (i !== activeSlide && !v.paused) {
+          v.pause();
+        }
+      });
+    };
+
+    if (immediate) pauseOthers();
+    else videoCleanupTimer = setTimeout(pauseOthers, 900);
+  }
+
+  syncActiveVideo(true);
+
+  // Lazy-fetch metadata for slides 1 & 2 after initial page paint settles
+  setTimeout(() => {
+    heroVids.forEach((v, i) => {
+      if (i !== activeSlide && v.preload === 'none') {
+        v.preload = 'metadata';
+      }
+    });
+  }, 1500);
+
+  // Pause active video automatically when scrolled past hero so scrolling/Leaflet stay 60fps
+  if (heroSectionEl && typeof IntersectionObserver !== 'undefined') {
+    const heroVisObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isHeroInView = entry.isIntersecting;
+        const activeVid = heroVids[activeSlide];
+        if (!activeVid) return;
+        if (isHeroInView) {
+          if (activeVid.paused) activeVid.play().catch(() => {});
+        } else {
+          heroVids.forEach(v => { if (!v.paused) v.pause(); });
+        }
+      });
+    }, { threshold: 0.25 });
+    heroVisObs.observe(heroSectionEl);
+  }
+
+  // Ambient Spotlight Sheen
   let heroPointerTicking = false;
   window.addEventListener('pointermove', (e) => {
-    if (!heroSectionEl || heroPointerTicking) return;
+    if (!heroSectionEl || !isHeroInView || heroPointerTicking) return;
     heroPointerTicking = true;
     requestAnimationFrame(() => {
       const r = heroSectionEl.getBoundingClientRect();
@@ -56,21 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
     activeSlide = (idx + SLIDES.length) % SLIDES.length;
     const s = SLIDES[activeSlide];
 
-    // 1. Crossfade videos immediately — pure GPU opacity crossfade (NO seek, NO currentTime=0)
-    heroVids.forEach((v, i) => {
-      const isActive = (i === activeSlide);
-      v.classList.toggle('active', isActive);
-      if (isActive && v.paused) {
-        v.play().catch(() => {});
-      }
-    });
+    syncActiveVideo(false);
 
-    // 2. Active dot updates immediately
     document.querySelectorAll('.hero-dot').forEach((d, i) => {
       d.classList.toggle('active', i === activeSlide);
     });
 
-    // 3. Ultra-smooth Two-Phase Text Transition
     heroBackdrop.classList.add('slide-exit');
     if (heroSectionEl) heroSectionEl.classList.add('hero-meta-exit');
 
@@ -89,14 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tag) tag.innerHTML = s.tagline;
       if (cnt) cnt.textContent = s.count;
 
-      // Prep enter position (opposite offset)
       heroBackdrop.classList.remove('slide-exit');
       heroBackdrop.classList.add('slide-prep');
-
-      // Force layout repaint
       void heroBackdrop.offsetWidth;
 
-      // Glide smoothly into neutral position
       requestAnimationFrame(() => {
         heroBackdrop.classList.remove('slide-prep');
         if (heroSectionEl) heroSectionEl.classList.remove('hero-meta-exit');

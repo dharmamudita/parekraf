@@ -167,18 +167,18 @@
        SECTION 1: ZERO-OVERLAP KINETIC MOTION HERO
   ===================================================================== -->
   <section class="hero" id="hero">
-    <!-- Cinematic Video Background Layer -->
+    <!-- Cinematic Video Background Layer (only Slide 0 decodes on initial load) -->
     <div class="hero-video-layer" aria-hidden="true">
       <video class="hero-vid active" id="hero-vid-0" src="video11.mp4" muted loop playsinline autoplay preload="auto"></video>
-      <video class="hero-vid" id="hero-vid-1" src="video22.mp4" muted loop playsinline autoplay preload="auto"></video>
-      <video class="hero-vid" id="hero-vid-2" src="video33.mp4" muted loop playsinline autoplay preload="auto"></video>
+      <video class="hero-vid" id="hero-vid-1" src="video22.mp4" muted loop playsinline preload="none"></video>
+      <video class="hero-vid" id="hero-vid-2" src="video33.mp4" muted loop playsinline preload="none"></video>
     </div>
 
     <div class="hero-grid-bg" aria-hidden="true"></div>
 
     <!-- Row 1: Top Kicker & Slide Controls -->
     <div class="hero-inner hero-top">
-      <div class="hero-kicker" id="h-eyebrow">DATA MINING 2 · CREATIVE INDUSTRY</div>
+      <div class="hero-kicker" id="h-eyebrow">PARIWISATA &amp; EKONOMI KREATIF · 2025</div>
       <div class="hero-controls">
         <button class="circle-arrow" id="slide-prev" aria-label="Slide sebelumnya">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
@@ -193,8 +193,8 @@
     <div class="hero-inner hero-stage">
       <h1 class="hero-backdrop-type" id="hero-backdrop">
         <span class="hero-line" id="h-line-1">PAREKRAF</span>
-        <span class="hero-line serif-mid" id="h-line-2">Intelligence</span>
-        <span class="hero-line" id="h-line-3">MIND 2025</span>
+        <span class="hero-line serif-mid" id="h-line-2">Investasi</span>
+        <span class="hero-line" id="h-line-3">NUSANTARA 2025</span>
       </h1>
 
       <div class="hero-dots" role="tablist" aria-label="Navigasi slide hero">
@@ -206,10 +206,10 @@
 
     <!-- Row 3: Bottom Tagline, CTA & Outlined Counter -->
     <div class="hero-inner hero-bottom">
-      <p class="hero-tagline" id="h-tagline">Smart Tourism Investment Intelligence for <em>Creative Economy</em> Growth.</p>
+      <p class="hero-tagline" id="h-tagline">Intelijen arus modal PMDN 38 provinsi berbasis <em>Apriori &amp; FP-Growth</em>.</p>
       <div class="hero-cta-wrap">
         <a href="#ringkasan" class="hero-cta-btn">
-          <span>Jelajahi Dashboard</span>
+          <span>Buka Dashboard</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </a>
         <span class="hero-cta-line" aria-hidden="true"></span>
@@ -226,21 +226,21 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">01 / TELEMETRI REALISASI PMDN 2025</div>
-            <h2 class="section-title">Arus modal wisata &amp; <em>ekonomi kreatif</em> Nusantara.</h2>
+            <div class="eyebrow">01 / RINGKASAN EKSEKUTIF</div>
+            <h2 class="section-title">Arus modal wisata &amp; <em>ekonomi kreatif</em>.</h2>
           </div>
           <div>
             <p class="section-lead">
-              ParekrafMind mengolah 1.471 catatan realisasi PMDN sektor pariwisata dari 38 provinsi sepanjang tahun 2025 untuk memetakan konsentrasi modal, ritme musiman triwulanan, serta kesenjangan wilayah luar Jawa.
+              Ringkasan realisasi PMDN 38 provinsi tahun 2025 dan sebaran skala usaha.
             </p>
             <div class="exec-actions-bar">
-              <button type="button" class="btn-primary sm" id="btn-open-brief" title="Buka &amp; Cetak Dokumen Resmi Executive Policy Brief">
+              <button type="button" class="btn-primary sm" id="btn-open-brief" title="Buka &amp; Cetak Executive Policy Brief">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                <span>Cetak Policy Brief Resmi (.PDF)</span>
+                <span>Policy Brief (.PDF)</span>
               </button>
               <a href="#peta" class="btn-ghost sm" style="text-decoration:none;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>
-                <span>Buka Peta Spasial Kepulauan ↓</span>
+                <span>Peta Spasial ↓</span>
               </a>
             </div>
           </div>
@@ -250,22 +250,22 @@
           <article class="card kpi-card reveal">
             <div class="kpi-label"><span>Total Realisasi PMDN</span><span class="kpi-tag">2025</span></div>
             <div class="kpi-value" data-count="52.76" data-prefix="Rp " data-suffix=" T" data-decimals="2">Rp 52,76 T</div>
-            <div class="kpi-foot">Akumulasi Q1 hingga Q4 nasional</div>
+            <div class="kpi-foot">Akumulasi Q1 – Q4</div>
           </article>
           <article class="card kpi-card reveal delay-1">
             <div class="kpi-label"><span>Cakupan Dataset</span><span class="kpi-tag">38 PROVINSI</span></div>
             <div class="kpi-value" data-count="1471" data-decimals="0">1.471</div>
-            <div class="kpi-foot">134 kawasan DPP · 1.337 non-DPP</div>
+            <div class="kpi-foot">134 DPP · 1.337 Non-DPP</div>
           </article>
           <article class="card kpi-card reveal delay-2">
             <div class="kpi-label"><span>Frequent Itemset</span><span class="kpi-tag">MIN SUP 3%</span></div>
             <div class="kpi-value" data-count="110" data-decimals="0">110</div>
-            <div class="kpi-foot">100% identik antara Apriori &amp; FP-Growth</div>
+            <div class="kpi-foot">Identik 100%</div>
           </article>
           <article class="card kpi-card reveal delay-3">
             <div class="kpi-label"><span>Aturan Asosiasi Valid</span><span class="kpi-tag">LIFT &gt; 1,0</span></div>
             <div class="kpi-value" data-count="131" data-suffix=" + 11" data-decimals="0">131 + 11</div>
-            <div class="kpi-foot">131 aturan umum &amp; 11 aturan subset DPP</div>
+            <div class="kpi-foot">131 Umum · 11 DPP</div>
           </article>
         </div>
 
@@ -274,7 +274,7 @@
             <div class="chart-header">
               <div>
                 <h3 class="chart-title">Momentum per Triwulan</h3>
-                <p class="chart-sub">Puncak serapan modal terjadi pada Triwulan 2 (Rp 15,24 T).</p>
+                <p class="chart-sub">Puncak serapan pada Triwulan 2 (Rp 15,24 T).</p>
               </div>
               <span class="kpi-tag">TRILIUN RP</span>
             </div>
@@ -285,7 +285,7 @@
             <div class="chart-header">
               <div>
                 <h3 class="chart-title">Sebaran 6 Zona Kepulauan</h3>
-                <p class="chart-sub" id="zone-subtitle">Total nilai realisasi investasi PMDN tahun 2025 per zona wilayah.</p>
+                <p class="chart-sub" id="zone-subtitle">Realisasi PMDN 2025 per zona wilayah.</p>
               </div>
               <div class="pill-switch" id="zone-mode-switch">
                 <button class="pill-btn active" data-mode="val">Total Rp</button>
@@ -300,10 +300,9 @@
         <div class="card reveal">
           <div class="chart-header" style="margin-bottom: 6px;">
             <div>
-              <h3 class="chart-title">Diskretisasi 4 Skala Usaha Industri Kreatif</h3>
-              <p class="chart-sub">Transformasi nilai investasi kontinu ke 4 kategori diskret sebelum One-Hot Encoding (1.471 × 16 atribut).</p>
+              <h3 class="chart-title">Distribusi 4 Skala Investasi</h3>
+              <p class="chart-sub">Segmentasi skala modal pada 1.471 transaksi PMDN 2025.</p>
             </div>
-            <span class="kpi-tag">BINNING DATA MINING</span>
           </div>
 
           <div class="tier-bar" aria-label="Proporsi kategori investasi">
@@ -319,24 +318,24 @@
                 <span class="tier-dot-wrap"><span class="swatch" style="background: #26262c; border: 1px solid rgba(255,255,255,0.35);"></span>Investasi Nol</span>
                 <span class="tier-pct">194 (13,2%)</span>
               </div>
-              <div class="tier-range">Tepat Rp 0 Juta</div>
-              <div class="tier-note">Wilayah belum menyerap PMDN pada triwulan pelaporan; butuh insentif promosi lokal.</div>
+              <div class="tier-range">Rp 0</div>
+              <div class="tier-note">Belum ada realisasi</div>
             </div>
             <div class="tier-item">
               <div class="tier-top">
                 <span class="tier-dot-wrap"><span class="swatch" style="background: #52525c;"></span>Investasi Rendah</span>
                 <span class="tier-pct">478 (32,5%)</span>
               </div>
-              <div class="tier-range">&gt; Rp 0 s/d Rp 500 Juta</div>
-              <div class="tier-note">Dominan usaha mikro kreatif: kuliner khas, kriya, oleh-oleh, dan jasa wisata lokal.</div>
+              <div class="tier-range">&le; Rp 500 Juta</div>
+              <div class="tier-note">UMKM Kriya &amp; Kuliner</div>
             </div>
             <div class="tier-item">
               <div class="tier-top">
                 <span class="tier-dot-wrap"><span class="swatch" style="background: #a1a1aa;"></span>Investasi Sedang</span>
                 <span class="tier-pct">457 (31,1%)</span>
               </div>
-              <div class="tier-range">&gt; Rp 500 Jt s/d Rp 10 M</div>
-              <div class="tier-note">Penginapan menengah, kafe tematik, restoran wisata, dan operator tur daerah.</div>
+              <div class="tier-range">Rp 500 Jt – 10 M</div>
+              <div class="tier-note">Usaha Menengah</div>
             </div>
             <div class="tier-item">
               <div class="tier-top">
@@ -344,7 +343,7 @@
                 <span class="tier-pct">342 (23,2%)</span>
               </div>
               <div class="tier-range">&gt; Rp 10 Miliar</div>
-              <div class="tier-note">Hotel berbintang, resort terpadu, dan penggerak utama ekosistem kreatif kawasan.</div>
+              <div class="tier-note">Korporasi &amp; Resor</div>
             </div>
           </div>
         </div>
@@ -358,11 +357,11 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">02 / PETA GEOSPASIAL TELEMETRI NUSANTARA</div>
-            <h2 class="section-title">Peta Interaktif Realisasi <em>38 Provinsi &amp; 10 DPP</em>.</h2>
+            <div class="eyebrow">02 / PETA GEOSPASIAL</div>
+            <h2 class="section-title">Sebaran <em>38 Provinsi &amp; 10 DPP</em>.</h2>
           </div>
           <p class="section-lead">
-            Peta geospasial Nusantara berbasis batas resmi provinsi Indonesia dan koordinat radar 10 Destinasi Pariwisata Prioritas (DPP). Klik provinsi atau pin destinasi untuk melihat telemetri PMDN 2025 dan aturan asosiasi.
+            Klik provinsi atau pin kawasan untuk melihat telemetri PMDN 2025.
           </p>
         </div>
 
@@ -416,7 +415,7 @@
               </div>
               <div class="geo-legend-pin-hint">
                 <span class="geo-dot-beacon"></span>
-                <span>Radar 10 Kawasan DPP (Klik pin atau provinsi untuk analisis)</span>
+                <span>10 Kawasan Prioritas (DPP)</span>
               </div>
             </div>
           </div>
@@ -471,11 +470,11 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">03 / SIMULASI KESELARASAN INVESTASI DAERAH</div>
-            <h2 class="section-title">Rekomendasi <em>daerah &amp; waktu</em> berbasis aturan asosiasi.</h2>
+            <div class="eyebrow">03 / SIMULASI MODAL</div>
+            <h2 class="section-title">Evaluasi <em>kesiapan daerah</em> &amp; sektor.</h2>
           </div>
           <p class="section-lead">
-            Pilih profil pengunjung dan salah satu dari 38 provinsi untuk melihat kabupaten paling aktif, wilayah yang masih sepi modal, musim puncak triwulan, hingga ekspor laporan CSV.
+            Simulasikan kesiapan wilayah berdasarkan provinsi, skala modal, subsektor kreatif, dan triwulan masuk.
           </p>
         </div>
 
@@ -484,10 +483,8 @@
           <div class="card">
             <div class="chart-header" style="margin-bottom: 12px;">
               <div>
-                <h3 class="chart-title">Parameter Rencana Investasi</h3>
-                <p class="chart-sub">Tentukan target wilayah, skala modal, subsektor kreatif, dan jendela waktu eksekusi.</p>
+                <h3 class="chart-title">Parameter Investasi</h3>
               </div>
-              <span class="kpi-tag">INPUT SIMULASI</span>
             </div>
 
             <div class="form-stack">
@@ -579,7 +576,7 @@
               <div class="chart-header" style="margin-bottom: 16px;">
                 <div>
                   <h3 class="chart-title" id="adv-title">Evaluasi Kesiapan Investasi</h3>
-                  <p class="chart-sub" id="adv-sub">Korelasi Realisasi PMDN 2025 dengan Pola Kaidah Asosiasi (Apriori &amp; FP-Growth).</p>
+                  <p class="chart-sub" id="adv-sub">Korelasi PMDN 2025 dengan kaidah asosiasi wilayah &amp; musim.</p>
                 </div>
                 <span class="kpi-tag" id="adv-dpp-tag">STATUS WILAYAH</span>
               </div>
@@ -679,18 +676,17 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">04 / ASSOCIATION RULE INTELLIGENCE</div>
-            <h2 class="section-title">Simulasi pola &amp; <em>aturan asosiasi</em> investasi.</h2>
+            <div class="eyebrow">04 / POLA ASOSIASI</div>
+            <h2 class="section-title">Eksplorasi <em>aturan asosiasi</em> investasi.</h2>
           </div>
           <p class="section-lead">
-            Uji kombinasi zona kepulauan, waktu triwulan, dan status kawasan untuk melihat kecenderungan investasi berdasarkan 131 aturan valid serta 1.471 data transaksi aktual.
+            Saring 131 aturan umum dan 11 aturan DPP berdasarkan Lift Ratio &amp; Confidence.
           </p>
         </div>
 
         <div class="sim-grid reveal">
           <div class="card">
             <h3 class="chart-title">Simulator Keterkaitan</h3>
-            <p class="chart-sub">Pilih kondisi wilayah &amp; waktu untuk mencocokkan aturan hasil model.</p>
 
             <div class="form-stack">
               <div>
@@ -782,7 +778,7 @@
               <thead>
                 <tr>
                   <th style="width: 48px;">No</th>
-                  <th>Aturan Asosiasi (JIKA Antecedent → MAKA Consequent)</th>
+                  <th>Aturan Asosiasi (IF → THEN)</th>
                   <th style="text-align: right;">Support</th>
                   <th style="text-align: right;">Confidence</th>
                   <th style="text-align: center;">Lift Ratio</th>
@@ -793,7 +789,7 @@
           </div>
 
           <div class="rule-detail-banner">
-            <span id="rule-detail-text">Klik baris aturan mana saja pada tabel di atas untuk membaca penjelasan sederhananya bagi sektor industri kreatif.</span>
+            <span id="rule-detail-text">Klik baris aturan pada tabel untuk melihat interpretasi bisnisnya.</span>
           </div>
 
           <div class="pagination">
@@ -814,11 +810,11 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">05 / KAWASAN STRATEGIS NASIONAL</div>
-            <h2 class="section-title">Peta 10 <em>Destinasi Prioritas</em> &amp; daya tariknya.</h2>
+            <div class="eyebrow">05 / KAWASAN PRIORITAS</div>
+            <h2 class="section-title">10 Destinasi Pariwisata <em>Prioritas</em>.</h2>
           </div>
           <p class="section-lead">
-            Klik salah satu kartu destinasi untuk melihat profil provinsi, tren triwulan, sentra ekonomi kreatif lokal, serta rincian kabupaten penyangganya.
+            Klik kartu destinasi untuk melihat profil triwulan dan rincian kabupaten penyangga.
           </p>
         </div>
 
@@ -872,18 +868,18 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">06 / BENCHMARK MODEL DATA MINING 2</div>
-            <h2 class="section-title">Komparasi objektif <em>Apriori vs FP-Growth</em>.</h2>
+            <div class="eyebrow">06 / BENCHMARK ALGORITMA</div>
+            <h2 class="section-title">Performa <em>Apriori vs FP-Growth</em>.</h2>
           </div>
           <p class="section-lead">
-            Hasil pengukuran langsung 5 kali iterasi dari notebook Google Colab ParekrafMind pada matriks biner 1.471 × 16 dengan min_support 3%.
+            Hasil 5 iterasi uji pada matriks biner 1.471 × 16 (min_support 3%).
           </p>
         </div>
 
         <div class="bench-layout reveal">
           <div class="card">
-            <h3 class="chart-title">Latensi Komputasi Aktual</h3>
-            <p class="chart-sub">Rata-rata waktu eksekusi 5 kali pengulangan (lebih kecil lebih cepat).</p>
+            <h3 class="chart-title">Latensi Komputasi</h3>
+            <p class="chart-sub">Rata-rata waktu eksekusi 5 iterasi.</p>
 
             <div class="bench-meter-group">
               <div>
@@ -907,7 +903,7 @@
             </div>
 
             <div class="sim-insight">
-              <strong>Catatan Teknis:</strong> Kedua algoritma menghasilkan tepat <strong>110 frequent itemset yang 100% identik</strong>. Pada matriks berdimensi kecil (16 kolom biner), vektorisasi array Apriori di <code>mlxtend</code> lebih cepat karena tidak memerlukan overhead pembuatan simpul objek FP-Tree di memori. Keunggulan FP-Growth baru dominan saat variasi atribut mencapai ratusan hingga ribuan item yang <em>sparse</em>.
+              Kedua algoritma mengekstraksi <strong>110 frequent itemset identik (100%)</strong>. Pada 16 atribut biner padat, vektorisasi Apriori lebih cepat karena bebas overhead konstruksi pohon memori FP-Tree.
             </div>
           </div>
 
@@ -917,26 +913,26 @@
               <table style="min-width: 500px;">
                 <thead>
                   <tr>
-                    <th>Parameter Evaluasi</th>
+                    <th>Parameter</th>
                     <th>Apriori</th>
                     <th>FP-Growth</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Pendekatan Ekstraksi</strong></td>
-                    <td>Iteratif Level-wise (Breadth-First)</td>
+                    <td><strong>Pendekatan</strong></td>
+                    <td>Level-wise (Breadth-First)</td>
                     <td>Divide-and-Conquer (FP-Tree)</td>
                   </tr>
                   <tr>
-                    <td><strong>Pembangkitan Kandidat</strong></td>
-                    <td>Ya (membentuk kandidat Ck)</td>
-                    <td>Tidak ada (langsung dari pohon)</td>
+                    <td><strong>Kandidat Itemset</strong></td>
+                    <td>Membentuk kandidat Ck</td>
+                    <td>Tanpa kandidat eksplisit</td>
                   </tr>
                   <tr>
-                    <td><strong>Jumlah Pemindaian Data</strong></td>
-                    <td>Beberapa kali sesuai panjang k-itemset</td>
-                    <td>Tepat 2 kali pemindaian basis data</td>
+                    <td><strong>Pemindaian Data</strong></td>
+                    <td>Berulang sesuai panjang k</td>
+                    <td>Tepat 2 kali pemindaian</td>
                   </tr>
                   <tr>
                     <td><strong>Frequent Itemset</strong></td>
@@ -944,37 +940,19 @@
                     <td class="mono-num">110 itemset (100% Identik)</td>
                   </tr>
                   <tr>
-                    <td><strong>Waktu Rata-rata (5× uji)</strong></td>
+                    <td><strong>Waktu Rata-rata (5×)</strong></td>
                     <td class="mono-num"><strong>2,659 ms</strong></td>
                     <td class="mono-num">6,492 ms</td>
                   </tr>
                   <tr>
-                    <td><strong>Skalabilitas Data Besar</strong></td>
-                    <td>Melambat jika variasi item sangat banyak</td>
-                    <td>Lebih stabil &amp; hemat pada data besar</td>
+                    <td><strong>Skalabilitas Sparse</strong></td>
+                    <td>Melambat pada item masif</td>
+                    <td>Stabil pada item berjumlah besar</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-
-        <div class="formula-grid reveal">
-          <article class="card formula-card">
-            <h4 class="formula-name">1. Support</h4>
-            <div class="formula-eq">Support(X, Y) = Transaksi(X ∪ Y) / N</div>
-            <p class="formula-desc">Mengukur seberapa sering kombinasi atribut X dan Y muncul bersama dari total 1.471 transaksi.</p>
-          </article>
-          <article class="card formula-card">
-            <h4 class="formula-name">2. Confidence</h4>
-            <div class="formula-eq">Confidence(X → Y) = Support(X ∪ Y) / Support(X)</div>
-            <p class="formula-desc">Menunjukkan peluang kemunculan kondisi Y apabila kondisi X telah terpenuhi pada data.</p>
-          </article>
-          <article class="card formula-card">
-            <h4 class="formula-name">3. Lift Ratio</h4>
-            <div class="formula-eq">Lift(X → Y) = Confidence(X → Y) / Support(Y)</div>
-            <p class="formula-desc">Memastikan aturan bukan kebetulan semata. Nilai Lift di atas 1,0 menandakan korelasi positif yang valid.</p>
-          </article>
         </div>
       </div>
     </section>
@@ -986,11 +964,11 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">07 / EKSPLORASI DATA MENTAH 2025</div>
-            <h2 class="section-title">Telusuri seluruh <em>1.471 catatan</em> PMDN.</h2>
+            <div class="eyebrow">07 / DATA EXPLORER</div>
+            <h2 class="section-title">Dataset <em>1.471 Transaksi</em> PMDN.</h2>
           </div>
           <p class="section-lead">
-            Seluruh baris dataset asli dari 38 provinsi tertanam langsung di dashboard sehingga dapat dicari, disaring per zona atau kategori, dan diunduh ke format CSV.
+            Telusuri, saring, dan ekspor 1.471 transaksi PMDN 2025 (.CSV).
           </p>
         </div>
 
@@ -1111,7 +1089,7 @@
       <div>
         <div class="footer-title">Parekraf<span style="font-family:'Instrument Serif',serif; font-style:italic; color:var(--ink-2); font-weight:400;">Mind</span></div>
         <p class="footer-sub">
-          Smart Tourism Investment Intelligence for Creative Economy Growth — Dashboard visualisasi pemodelan Association Rule Mining (Apriori &amp; FP-Growth) pada data realisasi PMDN sektor pariwisata Indonesia tahun 2025.
+          Smart Tourism Investment Intelligence for Creative Economy Growth · PMDN Sektor Pariwisata 2025.
         </p>
       </div>
       <div class="footer-meta">
