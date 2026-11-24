@@ -508,6 +508,7 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
+      background: #070708;
     }
 
     .hero-vid {
@@ -518,31 +519,34 @@
       min-height: 100%;
       width: auto;
       height: auto;
-      transform: translate(-50%, -50%);
+      transform: translate3d(-50%, -50%, 0);
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
-      /* Cinematic desaturated color grading — not garish */
-      filter: saturate(0.3) brightness(0.55) contrast(1.2);
+      visibility: hidden;
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s;
+      will-change: opacity;
+      pointer-events: none;
     }
 
     .hero-vid.active {
-      opacity: 1;
+      opacity: 0.55;
+      visibility: visible;
     }
 
-    /* Dark cinematic overlay on top of videos */
+    /* Dark cinematic overlay on top of videos - pure GPU blending, zero filter lag */
     .hero-video-layer::after {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 1;
       background:
+        radial-gradient(ellipse 85% 65% at 50% 50%, rgba(7, 7, 8, 0.38) 0%, rgba(7, 7, 8, 0.88) 100%),
         linear-gradient(180deg,
-          rgba(7, 7, 8, 0.82) 0%,
-          rgba(7, 7, 8, 0.45) 35%,
-          rgba(7, 7, 8, 0.38) 55%,
-          rgba(7, 7, 8, 0.75) 85%,
-          rgba(7, 7, 8, 0.95) 100%
+          rgba(7, 7, 8, 0.92) 0%,
+          rgba(7, 7, 8, 0.42) 30%,
+          rgba(7, 7, 8, 0.38) 60%,
+          rgba(7, 7, 8, 0.82) 85%,
+          #070708 100%
         );
       pointer-events: none;
     }
@@ -693,7 +697,9 @@
       -webkit-text-fill-color: transparent;
       animation: liquidChrome 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.22)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.09));
-      transition: transform 0.5s var(--ease), opacity 0.35s ease, filter 0.5s ease;
+      transform: translate3d(0, 0, 0);
+      will-change: transform, opacity;
+      transition: transform 0.46s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
     }
 
     @keyframes liquidChrome {
@@ -734,25 +740,53 @@
       }
     }
 
-    .hero-backdrop-type.switching #h-line-1 {
+    /* Ultra-smooth Hardware Accelerated Text Slide Transitions */
+    /* Phase 1: Smooth Exit */
+    .hero-backdrop-type.slide-exit #h-line-1 {
       opacity: 0;
-      transform: translateY(-20px) scale(0.96);
-      filter: blur(8px);
+      transform: translate3d(0, -24px, 0);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
     }
-    .hero-backdrop-type.switching #h-line-2 {
+    .hero-backdrop-type.slide-exit #h-line-2 {
       opacity: 0;
-      transform: scale(0.9);
-      filter: blur(6px);
+      transform: scale(0.94);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
     }
-    .hero-backdrop-type.switching #h-line-3 {
+    .hero-backdrop-type.slide-exit #h-line-3 {
       opacity: 0;
-      transform: translateY(20px) scale(0.96);
-      filter: blur(8px);
+      transform: translate3d(0, 24px, 0);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1), opacity 0.18s ease-in;
     }
 
-    #h-line-1 { transition-delay: 0ms; }
-    #h-line-2 { transition-delay: 45ms; }
-    #h-line-3 { transition-delay: 90ms; }
+    /* Phase 2: Enter preparation (offset without transition) */
+    .hero-backdrop-type.slide-prep #h-line-1 {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0);
+      transition: none !important;
+    }
+    .hero-backdrop-type.slide-prep #h-line-2 {
+      opacity: 0;
+      transform: scale(1.05);
+      transition: none !important;
+    }
+    .hero-backdrop-type.slide-prep #h-line-3 {
+      opacity: 0;
+      transform: translate3d(0, -24px, 0);
+      transition: none !important;
+    }
+
+    /* Meta text smooth fade */
+    #h-eyebrow, #h-tagline, #h-counter {
+      transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .hero.hero-meta-exit #h-eyebrow,
+    .hero.hero-meta-exit #h-tagline,
+    .hero.hero-meta-exit #h-counter {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0);
+      transition: opacity 0.16s ease-in, transform 0.16s ease-in;
+    }
 
     /* Vertical Pagination Dots (Desktop Right Side of Stage) */
     .hero-dots {
@@ -3067,8 +3101,8 @@
     <!-- Cinematic Video Background Layer -->
     <div class="hero-video-layer" aria-hidden="true">
       <video class="hero-vid active" id="hero-vid-0" src="video11.mp4" muted loop playsinline autoplay preload="auto"></video>
-      <video class="hero-vid" id="hero-vid-1" src="video22.mp4" muted loop playsinline preload="metadata"></video>
-      <video class="hero-vid" id="hero-vid-2" src="video33.mp4" muted loop playsinline preload="metadata"></video>
+      <video class="hero-vid" id="hero-vid-1" src="video22.mp4" muted loop playsinline autoplay preload="auto"></video>
+      <video class="hero-vid" id="hero-vid-2" src="video33.mp4" muted loop playsinline autoplay preload="auto"></video>
     </div>
 
     <div class="hero-grid-bg" aria-hidden="true"></div>
@@ -4284,14 +4318,19 @@
     const heroBackdrop = document.getElementById('hero-backdrop');
     const heroSectionEl = document.getElementById('hero');
 
-    // Ambient Spotlight Sheen that tracks cursor smoothly without tilting or shifting text
+    // Ambient Spotlight Sheen that tracks cursor smoothly without layout thrashing
+    let heroPointerTicking = false;
     window.addEventListener('pointermove', (e) => {
-      if (!heroSectionEl) return;
-      const r = heroSectionEl.getBoundingClientRect();
-      if (e.clientY <= r.bottom && e.clientY >= r.top) {
-        heroSectionEl.style.setProperty('--hx', `${e.clientX - r.left}px`);
-        heroSectionEl.style.setProperty('--hy', `${e.clientY - r.top}px`);
-      }
+      if (!heroSectionEl || heroPointerTicking) return;
+      heroPointerTicking = true;
+      requestAnimationFrame(() => {
+        const r = heroSectionEl.getBoundingClientRect();
+        if (e.clientY <= r.bottom && e.clientY >= r.top) {
+          heroSectionEl.style.setProperty('--hx', `${e.clientX - r.left}px`);
+          heroSectionEl.style.setProperty('--hy', `${e.clientY - r.top}px`);
+        }
+        heroPointerTicking = false;
+      });
     }, { passive: true });
 
     document.addEventListener('pointermove', (e) => {
@@ -4304,23 +4343,40 @@
 
     // Video crossfade elements
     const heroVids = document.querySelectorAll('.hero-vid');
+    let isSlideBusy = false;
+
+    // Ensure all videos start playing in hardware loop immediately
+    heroVids.forEach(v => {
+      v.play().catch(() => {});
+    });
 
     function setSlide(idx) {
+      if (isSlideBusy) return;
+      isSlideBusy = true;
+
       activeSlide = (idx + SLIDES.length) % SLIDES.length;
       const s = SLIDES[activeSlide];
-      heroBackdrop.classList.add('switching');
 
-      // Crossfade videos — smooth cinematic transition
+      // 1. Crossfade videos immediately — pure GPU opacity crossfade (NO seek, NO currentTime=0)
       heroVids.forEach((v, i) => {
-        const isActive = i === activeSlide;
+        const isActive = (i === activeSlide);
         v.classList.toggle('active', isActive);
-        if (isActive) {
-          v.currentTime = 0;
+        if (isActive && v.paused) {
           v.play().catch(() => {});
         }
       });
 
+      // 2. Active dot updates immediately
+      document.querySelectorAll('.hero-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === activeSlide);
+      });
+
+      // 3. Ultra-smooth Two-Phase Text Transition
+      heroBackdrop.classList.add('slide-exit');
+      if (heroSectionEl) heroSectionEl.classList.add('hero-meta-exit');
+
       setTimeout(() => {
+        // Swap text while completely invisible
         document.getElementById('h-line-1').textContent = s.l1;
         document.getElementById('h-line-2').textContent = s.l2;
         document.getElementById('h-line-3').textContent = s.l3;
@@ -4328,11 +4384,23 @@
         document.getElementById('h-tagline').innerHTML = s.tagline;
         document.getElementById('h-counter').textContent = s.count;
 
-        document.querySelectorAll('.hero-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === activeSlide);
+        // Prep enter position (opposite offset)
+        heroBackdrop.classList.remove('slide-exit');
+        heroBackdrop.classList.add('slide-prep');
+
+        // Force browser layout repaint
+        void heroBackdrop.offsetWidth;
+
+        // Glide smoothly into neutral position
+        requestAnimationFrame(() => {
+          heroBackdrop.classList.remove('slide-prep');
+          if (heroSectionEl) heroSectionEl.classList.remove('hero-meta-exit');
+
+          setTimeout(() => {
+            isSlideBusy = false;
+          }, 460);
         });
-        heroBackdrop.classList.remove('switching');
-      }, 150);
+      }, 190);
     }
 
     document.getElementById('slide-prev').addEventListener('click', () => setSlide(activeSlide - 1));
