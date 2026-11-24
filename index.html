@@ -13,7 +13,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Modular Stylesheets -->
+  <!-- Leaflet GIS Map Stylesheet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Modular Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/hero.css">
@@ -349,21 +352,17 @@
     </section>
 
     <!-- ===================================================================
-         SECTION 2B: PANDUAN PENGUNJUNG & PELUANG DAERAH (38 PROVINSI)
-    =================================================================== -->
-    
-    <!-- ===================================================================
-         SECTION 2A: PETA GEOSPASIAL INTERAKTIF PMDN 2025 (38 PROVINSI & 10 DPP)
+         SECTION 2: PETA GEOSPASIAL INTERAKTIF PMDN 2025 (38 PROVINSI & 10 DPP)
     =================================================================== -->
     <section class="section geo-section" id="peta">
       <div class="container">
         <div class="section-head reveal">
           <div>
             <div class="eyebrow">02 / PETA GEOSPASIAL TELEMETRI NUSANTARA</div>
-            <h2 class="section-title">Choropleth Sebaran Investasi <em>38 Provinsi &amp; 10 DPP</em>.</h2>
+            <h2 class="section-title">Peta Interaktif Realisasi <em>38 Provinsi &amp; 10 DPP</em>.</h2>
           </div>
           <p class="section-lead">
-            Navigasi spasial kepulauan Nusantara berbasis data realisasi PMDN 2025. Dilengkapi 10 beacon berdenyut untuk Destinasi Pariwisata Prioritas (DPP), filter zona kepulauan, dan HUD telemetri instan.
+            Peta geospasial Nusantara berbasis batas resmi provinsi Indonesia dan koordinat radar 10 Destinasi Pariwisata Prioritas (DPP). Klik provinsi atau pin destinasi untuk melihat telemetri PMDN 2025 dan aturan asosiasi.
           </p>
         </div>
 
@@ -398,181 +397,26 @@
         </div>
 
         <div class="geo-grid-layout reveal">
-          <!-- Vector Map Card -->
+          <!-- Real Interactive GIS Map Card -->
           <div class="geo-map-card">
-            <div class="geo-svg-wrap">
-              <svg class="geo-svg" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" aria-label="Peta Geospasial Indonesia">
-                <!-- Ambient Subtle Grid overlay -->
-                <defs>
-                  <pattern id="geo-grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-                  </pattern>
-                </defs>
-                <rect width="1000" height="420" fill="url(#geo-grid-pattern)" />
-
-                <!-- Island Groups (Choropleth Paths) -->
-                <!-- 1. SUMATERA -->
-                <g id="map-group-sumatera" class="geo-island-group" data-zone="Sumatera" data-name="Sumatera" data-rp="Rp 6,39 T" data-pct="12,1%" data-n="440" data-top="Investasi Rendah (Kriya &amp; Kuliner)">
-                  <!-- Mainland Sumatera -->
-                  <path class="geo-zone-path geo-tier-sumatera" d="M 68,52 C 78,44 95,48 112,65 C 135,88 165,120 190,150 C 215,182 245,225 262,262 C 268,276 258,288 242,286 C 228,284 215,265 198,235 C 172,192 135,145 102,108 C 82,86 62,80 68,52 Z" />
-                  <!-- Nias -->
-                  <path class="geo-zone-path geo-tier-sumatera" d="M 82,142 a 5,12 32 1,0 8,18 a 5,12 32 1,0 -8,-18 Z" />
-                  <!-- Mentawai -->
-                  <path class="geo-zone-path geo-tier-sumatera" d="M 128,212 a 6,20 38 1,0 12,26 a 6,20 38 1,0 -12,-26 Z" />
-                  <!-- Bangka -->
-                  <path class="geo-zone-path geo-tier-sumatera" d="M 272,212 C 280,202 292,212 296,226 C 298,238 286,246 276,242 C 268,236 266,222 272,212 Z" />
-                  <!-- Belitung -->
-                  <path class="geo-zone-path geo-tier-sumatera" d="M 312,238 C 318,232 326,238 328,246 C 326,254 316,256 312,250 Z" />
-                  <!-- Batam / Bintan -->
-                  <path class="geo-zone-path geo-tier-sumatera" d="M 225,145 a 7,5 0 1,0 10,6 a 7,5 0 1,0 -10,-6 Z" />
-                </g>
-
-                <!-- 2. KALIMANTAN -->
-                <g id="map-group-kalimantan" class="geo-island-group" data-zone="Kalimantan" data-name="Kalimantan" data-rp="Rp 1,15 T" data-pct="2,2%" data-n="149" data-top="Investasi Sedang (100% Non-DPP)">
-                  <!-- Borneo Silhouette -->
-                  <path class="geo-zone-path geo-tier-kalimantan" d="M 328,142 C 345,130 380,128 412,132 C 445,136 470,120 482,135 C 488,152 472,175 490,192 C 498,200 488,222 472,235 C 458,248 450,270 425,274 C 395,278 375,272 355,275 C 335,270 325,245 328,218 C 330,190 315,160 328,142 Z" />
-                </g>
-
-                <!-- 3. JAWA -->
-                <g id="map-group-jawa" class="geo-island-group" data-zone="Jawa" data-name="Pulau Jawa" data-rp="Rp 31,08 T" data-pct="58,9%" data-n="472" data-top="Investasi Tinggi (Hotel &amp; Resort)">
-                  <!-- Java Elongated Silhouette -->
-                  <path class="geo-zone-path geo-tier-jawa" d="M 252,324 C 275,320 310,321 345,323 C 375,320 382,312 392,315 C 400,318 415,325 435,328 C 452,332 462,338 458,345 C 445,348 410,344 375,342 C 340,340 305,338 270,336 C 250,335 248,328 252,324 Z" />
-                  <!-- Madura -->
-                  <path class="geo-zone-path geo-tier-jawa" d="M 432,316 C 445,312 462,315 468,320 C 462,325 442,326 432,316 Z" />
-                </g>
-
-                <!-- 4. BALI & NUSA TENGGARA -->
-                <g id="map-group-bali-nusra" class="geo-island-group" data-zone="Bali_Nusra" data-name="Bali &amp; Nusa Tenggara" data-rp="Rp 11,99 T" data-pct="22,7%" data-n="122" data-top="Investasi Tinggi (Hospitality Bahari)">
-                  <!-- Bali -->
-                  <path class="geo-zone-path geo-tier-bali-nusra" d="M 470,342 C 480,339 486,344 484,352 C 476,356 470,350 470,342 Z" />
-                  <!-- Lombok -->
-                  <path class="geo-zone-path geo-tier-bali-nusra" d="M 494,344 C 502,341 508,346 507,354 C 499,357 494,352 494,344 Z" />
-                  <!-- Sumbawa -->
-                  <path class="geo-zone-path geo-tier-bali-nusra" d="M 518,342 C 532,338 546,342 550,348 C 542,354 522,356 518,342 Z" />
-                  <!-- Flores & Komodo -->
-                  <path class="geo-zone-path geo-tier-bali-nusra" d="M 562,344 C 582,340 605,343 615,350 C 602,356 575,355 562,344 Z" />
-                  <!-- Sumba -->
-                  <path class="geo-zone-path geo-tier-bali-nusra" d="M 552,368 C 568,364 580,370 576,378 C 562,380 552,375 552,368 Z" />
-                  <!-- Timor Barat -->
-                  <path class="geo-zone-path geo-tier-bali-nusra" d="M 622,356 C 638,350 655,358 650,368 C 635,372 622,365 622,356 Z" />
-                </g>
-
-                <!-- 5. SULAWESI (THE TRUE 4-ARMED 'K' SHAPE) -->
-                <g id="map-group-sulawesi" class="geo-island-group" data-zone="Sulawesi" data-name="Sulawesi" data-rp="Rp 1,46 T" data-pct="2,8%" data-n="186" data-top="Investasi Rendah-Sedang">
-                  <!-- Sulawesi Distinct 4 Arms -->
-                  <path class="geo-zone-path geo-tier-sulawesi" d="M 532,222 C 530,198 542,175 565,158 C 588,142 612,128 625,122 C 628,128 615,142 595,155 C 575,168 555,188 548,208 C 555,206 580,218 612,228 C 618,235 608,242 585,236 C 565,232 552,234 548,242 C 555,255 572,282 585,312 C 578,318 565,305 552,280 C 542,260 538,248 534,242 C 528,252 522,285 526,312 C 520,318 512,305 515,275 C 518,245 525,232 532,222 Z" />
-                  <!-- Buton & Muna -->
-                  <path class="geo-zone-path geo-tier-sulawesi" d="M 582,320 a 5,10 20 1,0 8,15 a 5,10 20 1,0 -8,-15 Z" />
-                </g>
-
-                <!-- 6. MALUKU & PAPUA -->
-                <g id="map-group-maluku-papua" class="geo-island-group" data-zone="Maluku_Papua" data-name="Maluku &amp; Papua" data-rp="Rp 0,69 T" data-pct="1,3%" data-n="102" data-top="Investasi Nol / Awal (Ruang Tumbuh)">
-                  <!-- Halmahera (4-armed island) -->
-                  <path class="geo-zone-path geo-tier-maluku-papua" d="M 662,118 C 672,108 680,120 676,132 C 672,142 688,146 684,158 C 672,158 665,142 665,130 C 660,122 658,120 662,118 Z" />
-                  <!-- Buru -->
-                  <path class="geo-zone-path geo-tier-maluku-papua" d="M 645,226 a 9,7 0 1,0 18,5 a 9,7 0 1,0 -18,-5 Z" />
-                  <!-- Seram -->
-                  <path class="geo-zone-path geo-tier-maluku-papua" d="M 672,226 C 695,220 722,224 718,236 C 695,240 676,236 672,226 Z" />
-                  <!-- Papua with Bird's Head & Cenderawasih Bay -->
-                  <path class="geo-zone-path geo-tier-maluku-papua" d="M 732,192 C 722,185 725,172 738,168 C 752,165 762,175 758,188 C 765,192 775,190 782,180 C 795,162 812,158 825,168 C 838,178 828,198 845,204 C 878,206 915,214 950,228 C 956,242 952,278 946,310 C 912,314 872,305 848,286 C 825,268 812,254 792,238 C 772,222 758,212 745,218 C 738,222 730,215 732,192 Z" />
-                  <!-- Raja Ampat -->
-                  <path class="geo-zone-path geo-tier-maluku-papua" d="M 712,172 a 6,5 15 1,0 12,5 a 6,5 15 1,0 -12,-5 Z" />
-                </g>
-
-                <!-- 10 DPP BEACON PINS -->
-                <!-- Pin 1: Danau Toba -->
-                <g class="geo-pin-group" data-dpp="Danau Toba" data-name="Danau Toba (Sumut)" data-rp="Rp 43,1 M" data-rule="Confidence 42% | Lift 1,82x" transform="translate(132, 102)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-pulse delay" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Toba</text>
-                </g>
-
-                <!-- Pin 2: Bangka Belitung -->
-                <g class="geo-pin-group" data-dpp="Bangka Belitung" data-name="Bangka Belitung" data-rp="Rp 101,5 M" data-rule="Confidence 66,7% | Lift 1,79x" transform="translate(300, 238)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Belitung</text>
-                </g>
-
-                <!-- Pin 3: Borobudur - Yogya - Prambanan -->
-                <g class="geo-pin-group" data-dpp="Borobudur - Yogya - Prambananan" data-name="Borobudur - Yogya - Prambanan" data-rp="Rp 1.223,4 M" data-rule="Confidence 45,0% | Lift 1,31x" transform="translate(335, 332)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-pulse delay" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Borobudur</text>
-                </g>
-
-                <!-- Pin 4: Bromo - Tengger Semeru -->
-                <g class="geo-pin-group" data-dpp="Bromo - Tengger Semeru" data-name="Bromo - Tengger Semeru" data-rp="Rp 1.966,6 M" data-rule="Confidence 55,0% | Lift 1,60x" transform="translate(415, 338)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Bromo</text>
-                </g>
-
-                <!-- Pin 5: Lombok - Gili Tramena -->
-                <g class="geo-pin-group" data-dpp="Lombok - Gili Tramena" data-name="Lombok - Gili Tramena" data-rp="Rp 2.513,6 M" data-rule="Confidence 65,0% | Lift 1,89x" transform="translate(497, 348)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-pulse delay" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Lombok</text>
-                </g>
-
-                <!-- Pin 6: Labuan Bajo -->
-                <g class="geo-pin-group" data-dpp="Labuan Bajo" data-name="Labuan Bajo (NTT)" data-rp="Rp 1.672,2 M" data-rule="100% Transaksi Skala Tinggi" transform="translate(560, 350)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-pulse delay" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Labuan Bajo</text>
-                </g>
-
-                <!-- Pin 7: Likupang / Manado -->
-                <g class="geo-pin-group" data-dpp="Manado - Likupang" data-name="Manado - Likupang (Sulut)" data-rp="Rp 216,0 M" data-rule="Investasi Sedang | Lift 1,34x" transform="translate(620, 130)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Likupang</text>
-                </g>
-
-                <!-- Pin 8: Wakatobi -->
-                <g class="geo-pin-group" data-dpp="Wakatobi" data-name="Wakatobi (Sultra)" data-rp="Rp 0 M (Perintis)" data-rule="Realisasi Nol | Potensi Pertumbuhan Baru" transform="translate(585, 305)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Wakatobi</text>
-                </g>
-
-                <!-- Pin 9: Morotai -->
-                <g class="geo-pin-group" data-dpp="Morotai" data-name="Morotai (Malut)" data-rp="Rp 0,2 M" data-rule="Skala Mikro-Rendah" transform="translate(668, 115)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Morotai</text>
-                </g>
-
-                <!-- Pin 10: Raja Ampat -->
-                <g class="geo-pin-group" data-dpp="Raja Ampat" data-name="Raja Ampat (Papua Barat Daya)" data-rp="Rp 0,6 M" data-rule="Potensi Ekowisata Bahari Premium" transform="translate(712, 172)">
-                  <circle class="geo-pin-pulse" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-pulse delay" cx="0" cy="0" r="10"/>
-                  <circle class="geo-pin-center" cx="0" cy="0" r="4.5"/>
-                  <text x="8" y="3" fill="#ffffff" font-size="9" font-family="var(--font-mono)" opacity="0.85">Raja Ampat</text>
-                </g>
-              </svg>
-
-              <!-- Floating Tooltip -->
-              <div class="geo-tooltip" id="map-tooltip">
-                <strong id="tt-title">Nama Wilayah</strong>
-                <span id="tt-sub">Detail data</span>
+            <div class="real-gis-wrap">
+              <div class="gis-hud-overlay" aria-hidden="true">
+                <span class="gis-live-dot"></span>
+                <span>GIS NUSANTARA · 38 PROVINSI</span>
               </div>
+              <div id="leaflet-map" class="real-gis-map" aria-label="Peta Geospasial Interaktif Indonesia"></div>
             </div>
 
             <!-- Map Legend -->
             <div class="geo-legend-bar">
               <div class="geo-legend-gradient">
-                <span>Intensitas PMDN: Rendah (Rp 0,6 T)</span>
+                <span>Intensitas PMDN: Rendah (&lt;Rp 0,1 T)</span>
                 <div class="geo-grad-track"></div>
-                <span>Tinggi (Rp 31,08 T)</span>
+                <span>Tinggi (&gt;Rp 5 T)</span>
               </div>
               <div class="geo-legend-pin-hint">
                 <span class="geo-dot-beacon"></span>
-                <span>Radar 10 Kawasan DPP (Klik pin untuk analisis mendalam)</span>
+                <span>Radar 10 Kawasan DPP (Klik pin atau provinsi untuk analisis)</span>
               </div>
             </div>
           </div>
@@ -600,7 +444,7 @@
                   <div class="geo-hud-metric-val" id="hud-n">472 transaksi</div>
                 </div>
                 <div class="geo-hud-metric">
-                  <div class="geo-hud-metric-lbl">Skala Terbanyak</div>
+                  <div class="geo-hud-metric-lbl">Skala Dominan</div>
                   <div class="geo-hud-metric-val" id="hud-top">190 Skala Tinggi</div>
                 </div>
               </div>
@@ -627,7 +471,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">02 / SIMULASI KESELARASAN INVESTASI DAERAH</div>
+            <div class="eyebrow">03 / SIMULASI KESELARASAN INVESTASI DAERAH</div>
             <h2 class="section-title">Rekomendasi <em>daerah &amp; waktu</em> berbasis aturan asosiasi.</h2>
           </div>
           <p class="section-lead">
@@ -835,7 +679,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">03 / ASSOCIATION RULE INTELLIGENCE</div>
+            <div class="eyebrow">04 / ASSOCIATION RULE INTELLIGENCE</div>
             <h2 class="section-title">Simulasi pola &amp; <em>aturan asosiasi</em> investasi.</h2>
           </div>
           <p class="section-lead">
@@ -970,7 +814,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">04 / KAWASAN STRATEGIS NASIONAL</div>
+            <div class="eyebrow">05 / KAWASAN STRATEGIS NASIONAL</div>
             <h2 class="section-title">Peta 10 <em>Destinasi Prioritas</em> &amp; daya tariknya.</h2>
           </div>
           <p class="section-lead">
@@ -1028,7 +872,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">05 / BENCHMARK MODEL DATA MINING 2</div>
+            <div class="eyebrow">06 / BENCHMARK MODEL DATA MINING 2</div>
             <h2 class="section-title">Komparasi objektif <em>Apriori vs FP-Growth</em>.</h2>
           </div>
           <p class="section-lead">
@@ -1142,7 +986,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">06 / EKSPLORASI DATA MENTAH 2025</div>
+            <div class="eyebrow">07 / EKSPLORASI DATA MENTAH 2025</div>
             <h2 class="section-title">Telusuri seluruh <em>1.471 catatan</em> PMDN.</h2>
           </div>
           <p class="section-lead">
@@ -1278,7 +1122,194 @@
     </div>
   </footer>
 
-    <!-- Modular JavaScript Engine -->
+  <!-- Floating Thumb-Friendly Mobile Bottom Dock -->
+  <nav class="mobile-bottom-dock" id="mobile-dock" aria-label="Navigasi Cepat Mobile">
+    <a href="#ringkasan" class="dock-btn" data-target="ringkasan" aria-label="Ringkasan">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      <span>Ringkasan</span>
+    </a>
+    <a href="#peta" class="dock-btn" data-target="peta" aria-label="Peta Spasial">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      <span>Peta</span>
+    </a>
+    <a href="#panduan" class="dock-btn" data-target="panduan" aria-label="Simulasi Modal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      <span>Simulasi</span>
+    </a>
+    <a href="#asosiasi" class="dock-btn" data-target="asosiasi" aria-label="Asosiasi">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>Asosiasi</span>
+    </a>
+    <a href="#dpp" class="dock-btn" data-target="dpp" aria-label="DPP">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>DPP</span>
+    </a>
+    <button class="dock-btn" id="dock-menu-toggle" aria-label="Buka Semua Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <span>Menu</span>
+    </button>
+  </nav>
+
+  <!-- =====================================================================
+       EXECUTIVE POLICY BRIEF MODAL & PUBLICATION DOCUMENT
+  ===================================================================== -->
+  <div class="brief-overlay" id="brief-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="brief-doc-title">
+    <div class="brief-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="kpi-tag">RINGKASAN EKSEKUTIF KEBIJAKAN · PMDN 2025</span>
+          <h3 class="chart-title" style="margin-top:6px; font-size:20px;">Executive Policy Brief PMDN 2025</h3>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button type="button" class="btn-primary sm" id="btn-print-brief">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>Cetak / Simpan PDF</span>
+          </button>
+          <button type="button" class="modal-close" id="btn-close-brief" aria-label="Tutup Policy Brief">&times;</button>
+        </div>
+      </div>
+
+      <!-- Printable Paper Component -->
+      <div class="brief-paper" id="brief-paper">
+        <div class="brief-paper-head">
+          <div>
+            <div style="font-size:11px; font-weight:700; color:#71717a; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
+              FTIK Universitas Teknokrat Indonesia · Riset Data Mining 2
+            </div>
+            <h1 class="brief-paper-title" id="brief-doc-title">Executive Policy Brief: Telemetri PMDN &amp; Asosiasi Pariwisata 2025</h1>
+            <p class="brief-paper-sub">Analisis Kebijakan Pemerataan Investasi Sektor Pariwisata &amp; Ekonomi Kreatif</p>
+          </div>
+          <div style="text-align:right; font-size:10px; color:#71717a; line-height:1.4;">
+            <div><strong>Kode Dokumen:</strong> PKM/DM2/2026-01</div>
+            <div><strong>Cakupan Data:</strong> Q1 – Q4 2025 (38 Provinsi)</div>
+            <div><strong>Metodologi:</strong> Apriori &amp; FP-Growth</div>
+          </div>
+        </div>
+
+        <div class="brief-meta-strip">
+          <div class="brief-meta-item">
+            <span>Total Realisasi PMDN</span>
+            <strong>Rp 52,76 Triliun</strong>
+          </div>
+          <div class="brief-meta-item">
+            <span>Sampel Dataset</span>
+            <strong>1.471 Transaksi</strong>
+          </div>
+          <div class="brief-meta-item">
+            <span>Frequent Itemset</span>
+            <strong>110 Itemset (Identik)</strong>
+          </div>
+          <div class="brief-meta-item">
+            <span>Aturan Asosiasi Valid</span>
+            <strong>131 Umum + 11 DPP</strong>
+          </div>
+        </div>
+
+        <div class="brief-section-title">1. Ringkasan Eksekutif &amp; Temuan Makro</div>
+        <p>
+          Sepanjang tahun 2025, realisasi Penanaman Modal Dalam Negeri (PMDN) sektor pariwisata mencapai <strong>Rp 52,76 Triliun</strong> melalui 1.471 transaksi dari 38 provinsi Indonesia. Analisis data menunjukkan pola musiman yang tegas dengan puncak penyerapan modal pada <strong>Triwulan 2 (Rp 15,24 Triliun / 28,9%)</strong> dan Triwulan 3 (Rp 14,78 Triliun).
+        </p>
+
+        <div class="brief-section-title">2. Disparitas Wilayah &amp; Kinerja 10 Kawasan DPP</div>
+        <p>
+          Konsentrasi investasi nasional masih didominasi kawasan Pulau Jawa dan Bali-Nusa Tenggara:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Zona Kepulauan</th>
+              <th>Realisasi PMDN (Rp)</th>
+              <th>Pangsa (%)</th>
+              <th>Skala Dominan</th>
+              <th>Profil Ekosistem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pulau Jawa</strong></td>
+              <td>Rp 31,08 Triliun</td>
+              <td>58,9%</td>
+              <td>Investasi Tinggi (&gt;10 M)</td>
+              <td>Korporasi &amp; Hospitality Mapan</td>
+            </tr>
+            <tr>
+              <td><strong>Bali &amp; Nusa Tenggara</strong></td>
+              <td>Rp 11,99 Triliun</td>
+              <td>22,7%</td>
+              <td>Investasi Tinggi &amp; Sedang</td>
+              <td>Pariwisata Bahari &amp; Resort</td>
+            </tr>
+            <tr>
+              <td><strong>Sumatera</strong></td>
+              <td>Rp 6,39 Triliun</td>
+              <td>12,1%</td>
+              <td>Investasi Rendah (UMKM)</td>
+              <td>Sentra Kriya &amp; Kuliner</td>
+            </tr>
+            <tr>
+              <td><strong>Sulawesi</strong></td>
+              <td>Rp 1,46 Triliun</td>
+              <td>2,8%</td>
+              <td>Investasi Rendah-Sedang</td>
+              <td>Koridor Manado-Likupang</td>
+            </tr>
+            <tr>
+              <td><strong>Kalimantan</strong></td>
+              <td>Rp 1,15 Triliun</td>
+              <td>2,2%</td>
+              <td>Investasi Sedang (Non-DPP)</td>
+              <td>Akomodasi &amp; Jasa Penyangga</td>
+            </tr>
+            <tr>
+              <td><strong>Maluku &amp; Papua</strong></td>
+              <td>Rp 0,69 Triliun</td>
+              <td>1,3%</td>
+              <td>Investasi Nol &amp; Mikro</td>
+              <td>Wilayah Perintis Prioritas</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Pada 10 Kawasan DPP, <strong>Lombok - Gili Tramena (Rp 2.513,6 Miliar)</strong>, Bromo - Tengger Semeru (Rp 1.966,6 Miliar), dan Labuan Bajo (Rp 1.672,2 Miliar) menyerap investasi terbesar, sedangkan Morotai (Rp 0,2 Miliar) dan Wakatobi (Rp 0 Miliar) membutuhkan percepatan stimulus perintis.
+        </p>
+
+        <div class="brief-section-title">3. Validasi Konsistensi Algoritma Apriori vs FP-Growth</div>
+        <p>
+          Uji silang pada matriks biner 1.471 × 16 dengan <em>min_support</em> 3% membuktikan bahwa <strong>Apriori dan FP-Growth mengekstrak tepat 110 frequent itemset yang 100% identik</strong>. Dari sisi efisiensi waktu pada dimensi matriks 16 kolom, Apriori mencatat rata-rata <strong>2,659 ms</strong> dibanding FP-Growth sebesar 6,492 ms karena rendahnya overhead pembangunan pohon memori, sedangkan FP-Growth tetap unggul secara asimtotik pada dimensi item yang jauh lebih besar.
+        </p>
+
+        <div class="brief-section-title">4. Rekomendasi Kebijakan Strategis</div>
+        <ul>
+          <li><strong>Stimulus Dekonsentrasi Luar Jawa:</strong> Insentif daerah terarah bagi investasi skala menengah (&gt;Rp 500 Juta s/d Rp 10 Miliar) di koridor Maluku, Papua, dan Sulawesi Tenggara.</li>
+          <li><strong>Optimalisasi Momentum Triwulan 2:</strong> Penyelarasan forum kemitraan investasi pada akhir Triwulan 1 untuk menangkap puncak penyerapan modal Q2.</li>
+          <li><strong>Kemitraan Rantai Pasok UMKM:</strong> Integrasi pelaku kriya, tenun, dan kuliner lokal ke dalam rantai pasok industri hospitality kawasan DPP.</li>
+        </ul>
+
+        <div class="brief-signatures">
+          <div class="brief-sign-box">
+            <div>Disusun oleh:</div>
+            <div class="brief-sign-space"></div>
+            <strong>Dharma Mudita · Arga Bayu R. · Yolla F.</strong><br>
+            Tim Peneliti Data Mining 2<br>
+            FTIK Universitas Teknokrat Indonesia
+          </div>
+          <div class="brief-sign-box">
+            <div>Ruang Lingkup Rujukan:</div>
+            <div class="brief-sign-space"></div>
+            <strong>Analisis Sektor Pariwisata Nasional</strong><br>
+            Data Realisasi PMDN Tahun 2025<br>
+            38 Provinsi · 10 Kawasan DPP
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet GIS Engine & Official GeoJSON Boundaries -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/indonesia_geojson.js"></script>
+
+  <!-- Modular JavaScript Engine -->
   <script src="js/dataset.js"></script>
   <script src="js/navbar.js"></script>
   <script src="js/hero.js"></script>

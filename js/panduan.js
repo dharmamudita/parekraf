@@ -1,5 +1,5 @@
 /* =========================================================================
-   PANDUAN & SIMULASI KESELARASAN INVESTASI DAERAH (DATA MINING MATCHMAKER)
+   SIMULASI KESELARASAN INVESTASI DAERAH (BERBASIS ATURAN ASOSIASI 38 PROVINSI)
 ========================================================================= */
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof APP_DATA === 'undefined') return;
@@ -10,28 +10,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const qBtns = document.querySelectorAll('#match-q-selector .match-q-btn');
   const exportBtn = document.getElementById('adv-export');
 
-  // Populate province dropdown
+  // Populate 38 Provinces dropdown
   const provNames = [...new Set(APP_DATA.records.map(r => r[1]))].sort((a, b) => a.localeCompare(b, 'id'));
   if (advProv) {
     advProv.innerHTML = `<option value="ALL">Seluruh Indonesia (38 Provinsi)</option>` +
-      provNames.map(p => `<option value="${p}">${p}</option>`).join('');
+      provNames.map(p => `<option value="${p}" ${p === 'Nusa Tenggara Barat' ? 'selected' : ''}>${p}</option>`).join('');
   }
 
-  let matchCurrentScale = 'Investasi_Sedang';
-  let matchCurrentSector = 'kuliner';
-  let matchCurrentQuarter = 2;
+  // Read initial state from DOM active classes
+  const initScaleEl = document.querySelector('#match-scale-selector .match-scale-chip.active');
+  const initSectorEl = document.querySelector('#match-sector-selector .match-sector-btn.active');
+  const initQEl = document.querySelector('#match-q-selector .match-q-btn.active');
 
-  // Scale chip click
+  let matchCurrentScale = initScaleEl ? initScaleEl.dataset.scale : 'Investasi_Rendah';
+  let matchCurrentSector = initSectorEl ? initSectorEl.dataset.sector : 'kuliner';
+  let matchCurrentQuarter = initQEl ? parseInt(initQEl.dataset.q, 10) : 2;
+
   scaleChips.forEach(chip => {
     chip.addEventListener('click', () => {
       scaleChips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
-      matchCurrentScale = chip.dataset.scale || 'Investasi_Sedang';
+      matchCurrentScale = chip.dataset.scale || 'Investasi_Rendah';
       runMatchmakerSimulation();
     });
   });
 
-  // Sector button click
   sectorBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       sectorBtns.forEach(b => b.classList.remove('active'));
@@ -41,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Quarter button click
   qBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       qBtns.forEach(b => b.classList.remove('active'));
@@ -55,15 +57,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const prov = advProv ? advProv.value : 'ALL';
     const recs = prov === 'ALL' ? APP_DATA.records : APP_DATA.records.filter(r => r[1] === prov);
     const totalJuta = recs.reduce((acc, r) => acc + r[4], 0);
+    const dpps = [...new Set(recs.map(r => r[3]).filter(Boolean))];
+    const provZone = recs[0] ? recs[0][5] : 'Jawa';
 
-    // 1. Calculate Peak Quarter and Regional Distribution
+    // Update header card meta
+    const titleEl = document.getElementById('adv-title');
+    const subEl = document.getElementById('adv-sub');
+    const dppTagEl = document.getElementById('adv-dpp-tag');
+    if (titleEl) titleEl.textContent = prov === 'ALL' ? 'Evaluasi Nasional (38 Provinsi)' : `Evaluasi Kesiapan: ${prov}`;
+    if (subEl) {
+      subEl.textContent = dpps.length
+        ? `Memiliki kawasan prioritas: ${dpps.map(x => x.replace('Prambananan', 'Prambanan')).join(', ')}`
+        : 'Analisis keselarasan PMDN 2025 dengan kaidah Apriori & FP-Growth regional.';
+    }
+    if (dppTagEl) {
+      dppTagEl.textContent = prov === 'ALL'
+        ? '10 KAWASAN DPP'
+        : (dpps.length ? `${dpps.length} KAWASAN DPP` : 'WILAYAH NON-DPP');
+    }
+
+    // Peak Quarter & Kab/Kota aggregation
     const qTotals = [1, 2, 3, 4].map(q => ({
       q,
       val: recs.filter(r => r[0] === q).reduce((a, r) => a + r[4], 0)
     }));
     const peakQ = [...qTotals].sort((a, b) => b.val - a.val)[0];
 
-    // Unique Kab/Kota in this province
     const kabMap = new Map();
     recs.forEach(r => {
       const k = `${r[2]}|${r[1]}`;
@@ -83,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const kabCountEl = document.getElementById('adv-kab-count');
 
     if (totalRpEl) totalRpEl.textContent = fmtRpJuta(totalJuta);
-    if (peakQEl) peakQEl.textContent = peakQ && peakQ.val > 0 ? `Q${peakQ.q} (${fmtRpJuta(peakQ.val)})` : 'Tidak Aktif';
-    if (kabCountEl) kabCountEl.textContent = `${kabs.length} daerah`;
+    if (peakQEl) peakQEl.textContent = peakQ && peakQ.val > 0 ? `Q${peakQ.q} (${fmtRpJuta(peakQ.val)})` : 'Belum Aktif';
+    if (kabCountEl) kabCountEl.textContent = `${fmtInt(kabs.length)} daerah`;
 
-    // 2. Calculate Base Readiness Score (10-100)
+    // Readiness Score (18-98)
     let score = 52;
     if (totalJuta > 10000000) score += 14;
     else if (totalJuta > 1000000) score += 9;
@@ -107,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     score = Math.min(Math.max(score, 20), 98);
 
-    // Update Score Circle & Number
     const scoreNumEl = document.getElementById('match-score-num');
     const gaugeCircleEl = document.getElementById('match-gauge-circle');
     if (scoreNumEl) scoreNumEl.textContent = score;
@@ -116,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gaugeCircleEl.style.strokeDashoffset = offset;
     }
 
-    // 3. Professional Status & Risk Badge (No AI buzzwords)
+    // Risk & Opportunity Status Badge
     const riskTag = document.getElementById('match-risk-tag');
     const riskSummary = document.getElementById('match-score-summary');
 
@@ -146,35 +164,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (riskSummary) riskSummary.textContent = summaryText;
 
-    // 4. Query Matched Association Rules
+    // Query Matched Association Rules
     const matchedRuleEl = document.getElementById('match-matched-rule');
     const qTag = `Triwulan_${matchCurrentQuarter}`;
-    const relevantRules = APP_DATA.generalRules.filter(r => {
-      return (r.a.includes(matchCurrentScale) || r.c.includes(matchCurrentScale)) &&
-             (r.a.includes(qTag) || r.c.includes(qTag) || r.a.some(x => prov.includes(x)));
-    });
+    let relevantRules = APP_DATA.generalRules.filter(r =>
+      (r.a.includes(matchCurrentScale) || r.c.includes(matchCurrentScale)) &&
+      (r.a.includes(qTag) || r.c.includes(qTag) || r.a.includes(provZone) || r.c.includes(provZone))
+    );
+    if (!relevantRules.length) {
+      relevantRules = APP_DATA.generalRules.filter(r => r.a.includes(provZone) || r.c.includes(provZone) || r.a.includes(matchCurrentScale));
+    }
+    relevantRules.sort((a, b) => b.l - a.l);
 
     if (matchedRuleEl) {
       if (relevantRules.length > 0) {
         const topR = relevantRules[0];
         matchedRuleEl.innerHTML = `<strong>Kaidah Tervalidasi:</strong> [${topR.a.map(cleanTag).join(' + ')}] → [${topR.c.map(cleanTag).join(' + ')}]<br>` +
-          `Statistik: Confidence <strong>${fmtDec(topR.cf * 100, 1)}%</strong> · Lift <strong>${fmtDec(topR.l, 2)}x</strong> · Support <strong>${fmtDec(topR.s * 100, 1)}%</strong>. Pola ini terbukti signifikan pada 1.471 transaksi PMDN 2025.`;
+          `Statistik: Confidence <strong>${fmtDec(topR.cf * 100, 1)}%</strong> · Lift <strong>${fmtDec(topR.l, 2)}x</strong> · Support <strong>${fmtDec(topR.s * 100, 1)}%</strong> pada 1.471 transaksi PMDN 2025.`;
       } else {
-        matchedRuleEl.innerHTML = `<strong>Kaidah Terkait:</strong> Pola investasi ${cleanTag(matchCurrentScale)} pada Triwulan ${matchCurrentQuarter} di ${prov === 'ALL' ? 'Nasional' : prov} tergolong kombinasi eksploratif dengan rasio Lift rata-rata 1,28x.`;
+        matchedRuleEl.innerHTML = `<strong>Kaidah Terkait:</strong> Pola investasi ${cleanTag(matchCurrentScale)} pada Triwulan ${matchCurrentQuarter} di ${prov === 'ALL' ? 'Nasional' : prov} tergolong kombinasi eksploratif.`;
       }
     }
 
-    // 5. Dynamic 3 Directives
+    // Dynamic 3 Directives
+    const sectorLabels = {
+      kuliner: 'Kuliner Pesisir & Tradisi',
+      kriya: 'Kriya, Batik & Tenun',
+      akomodasi: 'Homestay & Eco-Resort',
+      bahari: 'Wisata Bahari & Phinisi',
+      event: 'Seni Pertunjukan & Budaya',
+      digital: 'Aplikasi & Media Kreatif'
+    };
     const dir1 = document.getElementById('match-dir-1');
     const dir2 = document.getElementById('match-dir-2');
     const dir3 = document.getElementById('match-dir-3');
 
     const prevQ = matchCurrentQuarter === 1 ? 4 : matchCurrentQuarter - 1;
-    if (dir1) dir1.innerHTML = `<strong>Timing Momentum:</strong> Inisiasi belanja sarana dan promosi di Triwulan ${prevQ} agar fasilitas siap beroperasi penuh saat puncak aktivitas Triwulan ${matchCurrentQuarter}.`;
-    if (dir2) dir2.innerHTML = `<strong>Sinergi Rantai Pasok:</strong> Kembangkan ekosistem subsektor ${cleanTag(matchCurrentSector)} melalui kemitraan dengan UMKM sentra kriya dan kuliner lokal setempat.`;
-    if (dir3) dir3.innerHTML = `<strong>Akses Perizinan & Fasilitas:</strong> Manfaatkan jalur perizinan berusaha terpadu (OSS) dan insentif pemda bagi subsektor prioritas daerah.`;
+    const leadKab = activeKabs[0] ? activeKabs[0].kab : 'sentra utama';
+    const oppKab = oppKabs[0] ? oppKabs[0].kab : 'daerah penyangga';
 
-    // 6. Update Top Active & Opportunity Kab/Kota Lists
+    if (dir1) dir1.innerHTML = `<strong>Timing Momentum:</strong> Inisiasi belanja sarana di ${leadKab} pada Triwulan ${prevQ} agar siap beroperasi penuh saat puncak Triwulan ${matchCurrentQuarter}.`;
+    if (dir2) dir2.innerHTML = `<strong>Sinergi Rantai Pasok:</strong> Kembangkan subsektor <em>${sectorLabels[matchCurrentSector] || cleanTag(matchCurrentSector)}</em> melalui kemitraan dengan sentra UMKM lokal di sekitar ${oppKab}.`;
+    if (dir3) dir3.innerHTML = `<strong>Akses Perizinan &amp; Fasilitas:</strong> Manfaatkan jalur perizinan berusaha terpadu (OSS) dan skema insentif pemda untuk skala ${cleanTag(matchCurrentScale)}.`;
+
+    // Update Top Active & Opportunity Kab/Kota Lists
     const topKabsEl = document.getElementById('adv-top-kabs');
     const oppKabsEl = document.getElementById('adv-opp-kabs');
 
@@ -205,11 +238,10 @@ document.addEventListener('DOMContentLoaded', () => {
     exportBtn.addEventListener('click', () => {
       const prov = advProv ? advProv.value : 'ALL';
       const rows = prov === 'ALL' ? APP_DATA.records : APP_DATA.records.filter(r => r[1] === prov);
-      const slug = prov.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+      const slug = prov === 'ALL' ? 'nasional_38_provinsi' : prov.toLowerCase().replace(/[^a-z0-9]+/g, '_');
       exportCSV(`parekrafmind_investasi_${slug}_2025.csv`, rows);
     });
   }
 
-  // Initial simulation run
   runMatchmakerSimulation();
 });

@@ -16,6 +16,9 @@
       --r-lg: 20px;
       --r-md: 12px;
       --r-sm: 8px;
+      --radius-card: 20px;
+      --radius-pill: 999px;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     *, *::before, *::after {

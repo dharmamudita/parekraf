@@ -30,6 +30,7 @@ function fmtDec(n, d = 2) {
 function cleanTag(t) {
   if (!t) return '';
   return String(t)
+    .replace(/^DPP_/, 'DPP: ')
     .replace(/^Zona_/, '')
     .replace(/^Triwulan_/, 'Triwulan ')
     .replace(/^Investasi_/, 'Investasi ')
@@ -39,20 +40,22 @@ function cleanTag(t) {
 
 function exportCSV(filename, rows) {
   if (!rows || !rows.length) return;
-  const header = ['Triwulan', 'Provinsi', 'Kabupaten/Kota', 'Kawasan DPP', 'Nilai Realisasi (Juta Rp)', 'Nilai Realisasi (Rupiah)', 'Skala Investasi', 'Zona Kepulauan'];
+  const header = ['Tahun', 'Triwulan', 'Provinsi', 'Kabupaten/Kota', 'Kawasan DPP', 'Nilai Realisasi (Juta Rp)', 'Nilai Realisasi (Rupiah)', 'Zona Kepulauan', 'Skala Investasi'];
+  const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
   const csvContent = [
     header.join(','),
     ...rows.map(r => [
+      2025,
       r[0],
-      `"${(r[1]||'').replace(/"/g, '""')}"`,
-      `"${(r[2]||'').replace(/"/g, '""')}"`,
-      `"${(r[3]||'-').replace(/"/g, '""')}"`,
+      esc(r[1]),
+      esc(r[2]),
+      esc(r[3] || 'Non-DPP'),
       r[4],
-      r[5],
-      `"${(r[6]||'').replace(/"/g, '""')}"`,
-      `"${(r[7]||'').replace(/"/g, '""')}"`
+      Math.round((r[4] || 0) * 1000000),
+      esc(r[5]),
+      esc(r[6])
     ].join(','))
-  ].join('\n');
+  ].join('\r\n');
 
   const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);

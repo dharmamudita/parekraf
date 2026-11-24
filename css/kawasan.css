@@ -74,6 +74,12 @@
       height: 30px;
     }
 
+    .dpp-nav-arrows {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .dpp-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
