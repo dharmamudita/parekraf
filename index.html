@@ -502,9 +502,60 @@
       background: radial-gradient(ellipse 75% 58% at 50% 45%, #16161b 0%, #070708 72%);
     }
 
+    /* Cinematic Video Background Layer */
+    .hero-video-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-vid {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Cinematic desaturated color grading — not garish */
+      filter: saturate(0.3) brightness(0.55) contrast(1.2);
+    }
+
+    .hero-vid.active {
+      opacity: 1;
+    }
+
+    /* Dark cinematic overlay on top of videos */
+    .hero-video-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg,
+          rgba(7, 7, 8, 0.82) 0%,
+          rgba(7, 7, 8, 0.45) 35%,
+          rgba(7, 7, 8, 0.38) 55%,
+          rgba(7, 7, 8, 0.75) 85%,
+          rgba(7, 7, 8, 0.95) 100%
+        );
+      pointer-events: none;
+    }
+
+    /* Reduced motion: hide videos */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-vid { display: none; }
+    }
+
     .hero-grid-bg {
       position: absolute;
       inset: 0;
+      z-index: 1;
       background-image:
         radial-gradient(circle 380px at var(--hx, 50%) var(--hy, 48%), rgba(255, 255, 255, 0.07) 0%, transparent 80%),
         linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
@@ -3013,6 +3064,13 @@
        SECTION 1: ZERO-OVERLAP KINETIC MOTION HERO
   ===================================================================== -->
   <section class="hero" id="hero">
+    <!-- Cinematic Video Background Layer -->
+    <div class="hero-video-layer" aria-hidden="true">
+      <video class="hero-vid active" id="hero-vid-0" src="video11.mp4" muted loop playsinline autoplay preload="auto"></video>
+      <video class="hero-vid" id="hero-vid-1" src="video22.mp4" muted loop playsinline preload="metadata"></video>
+      <video class="hero-vid" id="hero-vid-2" src="video33.mp4" muted loop playsinline preload="metadata"></video>
+    </div>
+
     <div class="hero-grid-bg" aria-hidden="true"></div>
 
     <!-- Row 1: Top Kicker & Slide Controls -->
@@ -4244,10 +4302,23 @@
       card.style.setProperty('--my', `${e.clientY - r.top}px`);
     }, { passive: true });
 
+    // Video crossfade elements
+    const heroVids = document.querySelectorAll('.hero-vid');
+
     function setSlide(idx) {
       activeSlide = (idx + SLIDES.length) % SLIDES.length;
       const s = SLIDES[activeSlide];
       heroBackdrop.classList.add('switching');
+
+      // Crossfade videos — smooth cinematic transition
+      heroVids.forEach((v, i) => {
+        const isActive = i === activeSlide;
+        v.classList.toggle('active', isActive);
+        if (isActive) {
+          v.currentTime = 0;
+          v.play().catch(() => {});
+        }
+      });
 
       setTimeout(() => {
         document.getElementById('h-line-1').textContent = s.l1;
